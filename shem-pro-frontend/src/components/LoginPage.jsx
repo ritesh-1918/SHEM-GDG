@@ -21,7 +21,6 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const { login } = useAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -34,6 +33,15 @@ const LoginPage = () => {
     }, 5000);
     return () => clearInterval(timer);
   }, []);
+
+  const { login, user } = useAuth();
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard', { replace: true });
+    }
+  }, [user, navigate]);
 
   const handleLogin = async (e, credentials = null) => {
     if (e && e.preventDefault) e.preventDefault();
