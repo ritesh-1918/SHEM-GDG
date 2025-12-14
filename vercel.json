@@ -19,8 +19,16 @@
             "dest": "/shem-pro-backend/server.js"
         },
         {
-            "src": "/(.*)",
+            "src": "/assets/(.*)",
+            "dest": "/shem-pro-frontend/assets/$1"
+        },
+        {
+            "src": "/(.*\\.(ico|png|jpg|jpeg|svg|css|js|json))",
             "dest": "/shem-pro-frontend/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/shem-pro-frontend/index.html"
         }
     ]
 }
