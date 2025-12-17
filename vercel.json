@@ -5,12 +5,8 @@
             "destination": "/api/index.js"
         },
         {
-            "source": "/((?!assets/|.*\\..*).*)",
-            "destination": "/shem-pro-frontend/dist/index.html"
-        },
-        {
-            "source": "/(.*)",
-            "destination": "/shem-pro-frontend/dist/$1"
+            "source": "/((?!api/|assets/|.*\\..*).*)",
+            "destination": "/index.html"
         }
     ]
 }

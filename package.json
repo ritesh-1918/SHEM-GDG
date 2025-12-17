@@ -12,6 +12,6 @@
   },
   "scripts": {
     "install": "npm install --prefix shem-pro-backend && npm install --prefix shem-pro-frontend",
-    "build": "npm run build --prefix shem-pro-frontend"
+    "build": "npm run build --prefix shem-pro-frontend && mkdir -p public && cp -r shem-pro-frontend/dist/* public/"
   }
 }
