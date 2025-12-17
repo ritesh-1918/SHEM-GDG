@@ -54,12 +54,47 @@ const callOpenRouter = async (prompt: string, key: string) => {
     return response.data.choices[0].message.content;
 };
 
+// Context Helper
+const prepareContext = (contextData: any) => {
+    if (!contextData) return 'No energy data available.';
+
+    const context = {
+        currentPower: contextData.power || contextData.currentConsumption || 'N/A',
+        voltage: contextData.voltage || 'N/A',
+        current: contextData.current || 'N/A',
+        todayConsumption: contextData.todayConsumption || contextData.hourlyConsumption || 'N/A',
+        monthlyConsumption: contextData.monthlyConsumption || contextData.totalMonthlyConsumption || 'N/A',
+        monthlyBudget: contextData.monthlyBudget || 2000,
+        topAppliances: contextData.topAppliances || ['AC', 'Refrigerator', 'Water Heater'],
+        peakHours: contextData.peakHours || '6 PM - 11 PM',
+        peakRate: contextData.peakRate || '₹8/unit',
+        temperature: contextData.temperature || '28°C'
+    };
+
+    return `
+    Current Energy Status:
+    - Power: ${context.currentPower}W | Voltage: ${context.voltage}V
+    - Today: ${context.todayConsumption} kWh
+    - Month: ${context.monthlyConsumption} kWh (Budget: ${context.monthlyBudget})
+    - Peak Hours: ${context.peakHours} @ ${context.peakRate}
+    - Temp: ${context.temperature}
+    `.trim();
+};
+
 export const generateAIResponse = async (prompt: string, contextData?: any) => {
     const config = getAIConfig();
+    const energyContext = prepareContext(contextData);
+
     const systemPrompt = `You are SHEM-AI, a smart home energy assistant. 
-    Current Energy Data: ${JSON.stringify(contextData || {})}
+    ${energyContext}
+    
     User Question: ${prompt}
-    Provide a concise, helpful response focusing on energy efficiency and cost savings. Keep it under 50 words unless asked for details.`;
+    
+    Guidelines:
+    - Be helpful and concise (under 100 words).
+    - Focus on energy saving and efficiency.
+    - Provide specific action items if applicable.
+    - Use Indian context (₹).`;
 
     // Attempt 1: Gemini
     if (config.gemini) {
