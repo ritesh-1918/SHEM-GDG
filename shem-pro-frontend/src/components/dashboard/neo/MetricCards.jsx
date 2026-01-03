@@ -20,27 +20,27 @@ const MetricCards = ({ data }) => {
     const { t } = useTranslation();
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card
                 label={t('dashboard.currentLoad')}
                 value={data?.power?.toFixed(0) || '0'}
                 unit={t('units.watts')}
                 icon={FireIcon}
-                color="text-orange-400"
+                color="text-dashboard-text"
             />
             <Card
                 label={t('dashboard.dailyUsage')}
                 value={data?.energy_kWh?.toFixed(2) || '0.00'}
                 unit={t('units.kilowattHours')}
                 icon={BoltIcon}
-                color="text-blue-400"
+                color="text-dashboard-text"
             />
             <Card
                 label={t('dashboard.estimatedCost')}
                 value={data?.cost_rs?.toFixed(0) || '0'}
                 unit={t('units.rupees')}
                 icon={CurrencyRupeeIcon}
-                color="text-green-400"
+                color="text-dashboard-text"
             />
         </div>
     );

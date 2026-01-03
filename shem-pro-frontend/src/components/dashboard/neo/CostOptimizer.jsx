@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
     ChartBarIcon,
     CalculatorIcon,
@@ -11,6 +11,7 @@ import {
     XMarkIcon,
     ChevronRightIcon
 } from '@heroicons/react/24/solid';
+import { useTranslation } from 'react-i18next';
 
 // API base URL - uses Render production or localhost for development
 const API_BASE = import.meta.env.VITE_API_BASE_URL
@@ -21,61 +22,13 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL
 const CACHE_KEY = 'costOptimizerData';
 const CACHE_EXPIRY_KEY = 'costOptimizerExpiry';
 
-// Action items with details
-const ACTION_ITEMS = [
-    {
-        id: 1,
-        icon: '🥇',
-        title: 'Shift AC to 11 PM - 6 AM',
-        monthlySavings: 167,
-        annualSavings: 2000,
-        effort: 'easy',
-        description: 'Use timer or smart plug to run AC during off-peak hours'
-    },
-    {
-        id: 2,
-        icon: '🥈',
-        title: 'Run water heater after midnight',
-        monthlySavings: 80,
-        annualSavings: 960,
-        effort: 'easy',
-        description: 'Heat water during off-peak and use stored hot water'
-    },
-    {
-        id: 3,
-        icon: '🥉',
-        title: 'Schedule washing for 1-2 AM',
-        monthlySavings: 40,
-        annualSavings: 480,
-        effort: 'medium',
-        description: 'Use delay start feature on washing machine'
-    },
-    {
-        id: 4,
-        icon: '🏅',
-        title: 'Charge EV overnight',
-        monthlySavings: 125,
-        annualSavings: 1500,
-        effort: 'easy',
-        description: 'Schedule EV charging for 12 AM - 5 AM'
-    },
-    {
-        id: 5,
-        icon: '🏅',
-        title: 'Run dishwasher after 11 PM',
-        monthlySavings: 25,
-        annualSavings: 300,
-        effort: 'easy',
-        description: 'Use delay start or run before bed'
-    }
-];
 
 // Effort badge component
 const EffortBadge = ({ effort }) => {
     const colors = {
-        easy: 'bg-green-500/20 text-green-400 border-green-500/30',
-        medium: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-        hard: 'bg-red-500/20 text-red-400 border-red-500/30'
+        easy: 'bg-dashboard-textSecondary/10 text-dashboard-textSecondary border-dashboard-textSecondary/20',
+        medium: 'bg-dashboard-textSecondary/30 text-dashboard-text border-dashboard-textSecondary/50',
+        hard: 'bg-dashboard-text text-dashboard-card border-transparent'
     };
 
     return (
@@ -87,6 +40,7 @@ const EffortBadge = ({ effort }) => {
 
 // Simple bar chart component
 const BarChart = ({ peakUnits, offPeakUnits, peakCost, offPeakCost }) => {
+    const { t } = useTranslation();
     const maxUnits = Math.max(peakUnits, offPeakUnits);
     const peakHeight = (peakUnits / maxUnits) * 100;
     const offPeakHeight = (offPeakUnits / maxUnits) * 100;
@@ -97,12 +51,12 @@ const BarChart = ({ peakUnits, offPeakUnits, peakCost, offPeakCost }) => {
             <div className="flex flex-col items-center">
                 <div className="text-sm text-dashboard-textSecondary mb-2">₹{peakCost}</div>
                 <div
-                    className="w-20 bg-gradient-to-t from-red-600 to-orange-400 rounded-t-lg transition-all duration-500"
+                    className="w-20 bg-dashboard-textSecondary rounded-t-lg transition-all duration-500"
                     style={{ height: `${peakHeight}%`, minHeight: '20px' }}
                 />
                 <div className="mt-2 text-center">
-                    <p className="text-dashboard-text font-bold">{peakUnits} units</p>
-                    <p className="text-xs text-dashboard-textSecondary">Peak Hours</p>
+                    <p className="text-dashboard-text font-bold">{peakUnits} {t('common.units')}</p>
+                    <p className="text-xs text-dashboard-textSecondary">{t('peakHours.peakHours')}</p>
                 </div>
             </div>
 
@@ -110,12 +64,12 @@ const BarChart = ({ peakUnits, offPeakUnits, peakCost, offPeakCost }) => {
             <div className="flex flex-col items-center">
                 <div className="text-sm text-dashboard-textSecondary mb-2">₹{offPeakCost}</div>
                 <div
-                    className="w-20 bg-gradient-to-t from-green-600 to-emerald-400 rounded-t-lg transition-all duration-500"
+                    className="w-20 bg-dashboard-text rounded-t-lg transition-all duration-500"
                     style={{ height: `${offPeakHeight}%`, minHeight: '20px' }}
                 />
                 <div className="mt-2 text-center">
-                    <p className="text-dashboard-text font-bold">{offPeakUnits} units</p>
-                    <p className="text-xs text-dashboard-textSecondary">Off-Peak</p>
+                    <p className="text-dashboard-text font-bold">{offPeakUnits} {t('common.units')}</p>
+                    <p className="text-xs text-dashboard-textSecondary">{t('peakHours.offPeakHours')}</p>
                 </div>
             </div>
         </div>
@@ -124,6 +78,7 @@ const BarChart = ({ peakUnits, offPeakUnits, peakCost, offPeakCost }) => {
 
 // Tab 1: Current Costs
 const CurrentCostsTab = ({ data }) => {
+    const { t } = useTranslation();
     const totalUnits = data.totalUnits || 120;
     const peakUnits = data.peakUnits || 60;
     const offPeakUnits = data.offPeakUnits || 60;
@@ -138,44 +93,44 @@ const CurrentCostsTab = ({ data }) => {
             {/* Summary Cards */}
             <div className="grid grid-cols-2 gap-4">
                 <div className="bg-dashboard-textSecondary/10 rounded-xl p-4">
-                    <p className="text-sm text-dashboard-textSecondary">Total Consumption</p>
-                    <p className="text-2xl font-bold text-dashboard-text">{totalUnits} <span className="text-sm font-normal">units</span></p>
+                    <p className="text-sm text-dashboard-textSecondary">{t('costOptimizer.totalConsumption')}</p>
+                    <p className="text-2xl font-bold text-dashboard-text">{totalUnits} <span className="text-sm font-normal">{t('common.units')}</span></p>
                 </div>
-                <div className="bg-gradient-to-r from-green-900/30 to-emerald-900/30 rounded-xl p-4 border border-green-500/20">
-                    <p className="text-sm text-dashboard-textSecondary">Total Cost</p>
-                    <p className="text-2xl font-bold text-green-400">₹{totalCost}</p>
+                <div className="bg-dashboard-card rounded-xl p-4 border border-dashboard-textSecondary/20">
+                    <p className="text-sm text-dashboard-textSecondary">{t('costOptimizer.totalCost')}</p>
+                    <p className="text-2xl font-bold text-dashboard-text">₹{totalCost}</p>
                 </div>
             </div>
 
             {/* Breakdown */}
             <div className="bg-dashboard-textSecondary/10 rounded-xl p-4 space-y-3">
-                <h4 className="text-sm font-medium text-dashboard-text mb-3">Cost Breakdown</h4>
+                <h4 className="text-sm font-medium text-dashboard-text mb-3">{t('costOptimizer.costBreakdown')}</h4>
 
                 <div className="flex justify-between items-center py-2 border-b border-dashboard-textSecondary/20">
                     <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 bg-red-500 rounded-full" />
-                        <span className="text-dashboard-textSecondary">Peak Hours ({peakUnits} units @ ₹{peakRate})</span>
+                        <div className="w-3 h-3 bg-dashboard-textSecondary rounded-full" />
+                        <span className="text-dashboard-textSecondary">{t('peakHours.peakHours')} ({peakUnits} {t('common.units')} @ ₹{peakRate})</span>
                     </div>
                     <span className="text-dashboard-text font-bold">₹{peakCost}</span>
                 </div>
 
                 <div className="flex justify-between items-center py-2 border-b border-dashboard-textSecondary/20">
                     <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 bg-green-500 rounded-full" />
-                        <span className="text-dashboard-textSecondary">Off-Peak ({offPeakUnits} units @ ₹{offPeakRate})</span>
+                        <div className="w-3 h-3 bg-dashboard-text rounded-full" />
+                        <span className="text-dashboard-textSecondary">{t('peakHours.offPeakHours')} ({offPeakUnits} {t('common.units')} @ ₹{offPeakRate})</span>
                     </div>
                     <span className="text-dashboard-text font-bold">₹{offPeakCost}</span>
                 </div>
 
                 <div className="flex justify-between items-center pt-2">
-                    <span className="text-dashboard-text font-medium">Total This Month</span>
-                    <span className="text-accent font-bold text-lg">₹{totalCost}</span>
+                    <span className="text-dashboard-text font-medium">{t('analytics.totalThisWeek')}</span>
+                    <span className="text-dashboard-text font-bold text-lg">₹{totalCost}</span>
                 </div>
             </div>
 
             {/* Bar Chart */}
             <div className="bg-dashboard-textSecondary/10 rounded-xl p-4">
-                <h4 className="text-sm font-medium text-dashboard-text mb-2">Peak vs Off-Peak Visualization</h4>
+                <h4 className="text-sm font-medium text-dashboard-text mb-2">{t('costOptimizer.peakVsOffPeak')}</h4>
                 <BarChart
                     peakUnits={peakUnits}
                     offPeakUnits={offPeakUnits}
@@ -189,6 +144,7 @@ const CurrentCostsTab = ({ data }) => {
 
 // Tab 2: What-If Calculator
 const WhatIfTab = ({ data }) => {
+    const { t } = useTranslation();
     const [peakReduction, setPeakReduction] = useState(20);
 
     const peakUnits = data.peakUnits || 60;
@@ -206,23 +162,23 @@ const WhatIfTab = ({ data }) => {
 
     // Scenario cards
     const scenarios = [
-        { appliance: 'AC', percent: 20, savings: 156 },
-        { appliance: 'Water Heater', percent: 100, savings: 80 },
-        { appliance: 'Washing Machine', percent: 100, savings: 40 }
+        { appliance: t('common.ac'), percent: 20, savings: 156 },
+        { appliance: t('common.waterHeater'), percent: 100, savings: 80 },
+        { appliance: t('common.washingMachine'), percent: 100, savings: 40 }
     ];
 
     return (
         <div className="space-y-6">
             {/* Interactive Slider */}
-            <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-xl p-6 border border-purple-500/20">
+            <div className="bg-dashboard-card rounded-xl p-6 border border-dashboard-textSecondary/20">
                 <h4 className="text-dashboard-text font-medium mb-4 flex items-center gap-2">
-                    <CalculatorIcon className="w-5 h-5 text-purple-400" />
-                    Adjust Peak Usage Reduction
+                    <CalculatorIcon className="w-5 h-5 text-dashboard-text" />
+                    {t('costOptimizer.adjustPeakReduction')}
                 </h4>
 
                 <div className="mb-4">
                     <div className="flex justify-between text-sm mb-2">
-                        <span className="text-dashboard-textSecondary">Reduce peak usage by:</span>
+                        <span className="text-dashboard-textSecondary">{t('costOptimizer.reducePeakBy')}</span>
                         <span className="text-dashboard-text font-bold">{peakReduction}%</span>
                     </div>
                     <input
@@ -231,7 +187,7 @@ const WhatIfTab = ({ data }) => {
                         max="100"
                         value={peakReduction}
                         onChange={(e) => setPeakReduction(parseInt(e.target.value))}
-                        className="w-full h-2 bg-dashboard-textSecondary/20 rounded-lg appearance-none cursor-pointer accent-purple-500"
+                        className="w-full h-2 bg-dashboard-textSecondary/20 rounded-lg appearance-none cursor-pointer accent-dashboard-text"
                     />
                     <div className="flex justify-between text-xs text-dashboard-textSecondary mt-1">
                         <span>0%</span>
@@ -243,19 +199,19 @@ const WhatIfTab = ({ data }) => {
                 {/* Real-time savings display */}
                 <div className="grid grid-cols-2 gap-4 mt-6">
                     <div className="bg-dashboard-textSecondary/15 rounded-lg p-4 text-center">
-                        <p className="text-sm text-dashboard-textSecondary">Monthly Savings</p>
-                        <p className="text-2xl font-bold text-green-400">₹{actualSavings.toFixed(0)}</p>
+                        <p className="text-sm text-dashboard-textSecondary">{t('costOptimizer.monthlySavings')}</p>
+                        <p className="text-2xl font-bold text-dashboard-text">₹{actualSavings.toFixed(0)}</p>
                     </div>
                     <div className="bg-dashboard-textSecondary/15 rounded-lg p-4 text-center">
-                        <p className="text-sm text-dashboard-textSecondary">Annual Savings</p>
-                        <p className="text-2xl font-bold text-accent">₹{annualSavings.toFixed(0)}</p>
+                        <p className="text-sm text-dashboard-textSecondary">{t('costOptimizer.annualSavings')}</p>
+                        <p className="text-2xl font-bold text-dashboard-text">₹{annualSavings.toFixed(0)}</p>
                     </div>
                 </div>
             </div>
 
             {/* Scenario Cards */}
             <div className="space-y-3">
-                <h4 className="text-sm font-medium text-dashboard-text">Quick Scenarios</h4>
+                <h4 className="text-sm font-medium text-dashboard-text">{t('costOptimizer.quickScenarios')}</h4>
 
                 {scenarios.map((scenario, idx) => (
                     <div
@@ -263,31 +219,31 @@ const WhatIfTab = ({ data }) => {
                         className="flex items-center justify-between bg-dashboard-textSecondary/10 rounded-xl p-4 hover:bg-dashboard-textSecondary/20 transition-colors cursor-pointer"
                     >
                         <div className="flex items-center gap-3">
-                            <div className="p-2 bg-accent/20 rounded-lg">
-                                <BoltIcon className="w-5 h-5 text-accent" />
+                            <div className="p-2 bg-dashboard-textSecondary/10 rounded-lg">
+                                <BoltIcon className="w-5 h-5 text-dashboard-text" />
                             </div>
                             <div>
-                                <p className="text-dashboard-text font-medium">Shift {scenario.percent}% of {scenario.appliance}</p>
-                                <p className="text-xs text-dashboard-textSecondary">Move to off-peak hours</p>
+                                <p className="text-dashboard-text font-medium">{t('costOptimizer.shiftAppliance', { percent: scenario.percent, appliance: scenario.appliance })}</p>
+                                <p className="text-xs text-dashboard-textSecondary">{t('costOptimizer.moveToOffPeak')}</p>
                             </div>
                         </div>
                         <div className="text-right">
-                            <p className="text-green-400 font-bold">Save ₹{scenario.savings}/month</p>
-                            <p className="text-xs text-dashboard-textSecondary">₹{scenario.savings * 12}/year</p>
+                            <p className="text-dashboard-text font-bold">{t('peakHours.shiftToSave')} ₹{scenario.savings}/mo</p>
+                            <p className="text-xs text-dashboard-textSecondary">₹{scenario.savings * 12}/yr</p>
                         </div>
                     </div>
                 ))}
             </div>
 
             {/* Total Potential */}
-            <div className="bg-gradient-to-r from-green-900/40 to-emerald-900/40 rounded-xl p-6 border border-green-500/30">
+            <div className="bg-dashboard-card rounded-xl p-6 border border-dashboard-textSecondary/20">
                 <div className="flex justify-between items-center">
                     <div>
-                        <p className="text-dashboard-textSecondary text-sm">Total Potential Savings</p>
-                        <p className="text-3xl font-bold text-green-400">₹{scenarios.reduce((sum, s) => sum + s.savings, 0)}/month</p>
+                        <p className="text-dashboard-textSecondary text-sm">{t('costOptimizer.totalPotential')}</p>
+                        <p className="text-3xl font-bold text-dashboard-text">₹{scenarios.reduce((sum, s) => sum + s.savings, 0)}/mo</p>
                     </div>
                     <div className="text-right">
-                        <p className="text-dashboard-textSecondary text-sm">Annual</p>
+                        <p className="text-dashboard-textSecondary text-sm">{t('costOptimizer.annual')}</p>
                         <p className="text-xl font-bold text-dashboard-text">₹{scenarios.reduce((sum, s) => sum + s.savings * 12, 0)}</p>
                     </div>
                 </div>
@@ -297,9 +253,10 @@ const WhatIfTab = ({ data }) => {
 };
 
 // Tab 3: Action Plan
-const ActionPlanTab = ({ completedActions, onToggleAction }) => {
-    const totalSavings = ACTION_ITEMS.reduce((sum, item) => sum + item.annualSavings, 0);
-    const completedSavings = ACTION_ITEMS
+const ActionPlanTab = ({ completedActions, onToggleAction, actionItems }) => {
+    const { t } = useTranslation();
+    const totalSavings = actionItems.reduce((sum, item) => sum + item.annualSavings, 0);
+    const completedSavings = actionItems
         .filter(item => completedActions.includes(item.id))
         .reduce((sum, item) => sum + item.annualSavings, 0);
 
@@ -308,34 +265,34 @@ const ActionPlanTab = ({ completedActions, onToggleAction }) => {
             {/* Progress */}
             <div className="bg-dashboard-textSecondary/10 rounded-xl p-4">
                 <div className="flex justify-between items-center mb-3">
-                    <span className="text-dashboard-textSecondary text-sm">Your Progress</span>
+                    <span className="text-dashboard-textSecondary text-sm">{t('costOptimizer.yourProgress')}</span>
                     <span className="text-dashboard-text font-medium">
-                        {completedActions.length}/{ACTION_ITEMS.length} actions completed
+                        {completedActions.length}/{actionItems.length} {t('costOptimizer.actionsCompleted')}
                     </span>
                 </div>
                 <div className="h-2 bg-dashboard-textSecondary/20 rounded-full overflow-hidden">
                     <div
-                        className="h-full bg-gradient-to-r from-accent to-yellow-400 transition-all duration-500"
-                        style={{ width: `${(completedActions.length / ACTION_ITEMS.length) * 100}%` }}
+                        className="h-full bg-dashboard-text transition-all duration-500"
+                        style={{ width: `${(completedActions.length / actionItems.length) * 100}%` }}
                     />
                 </div>
                 <div className="mt-2 text-center text-sm">
-                    <span className="text-green-400">₹{completedSavings}</span>
-                    <span className="text-dashboard-textSecondary"> of ₹{totalSavings} annual savings unlocked</span>
+                    <span className="text-dashboard-text">₹{completedSavings}</span>
+                    <span className="text-dashboard-textSecondary"> of ₹{totalSavings} {t('costOptimizer.annualSavingsUnlocked')}</span>
                 </div>
             </div>
 
             {/* Action Items */}
             <div className="space-y-3">
-                {ACTION_ITEMS.map((item) => {
+                {actionItems.map((item) => {
                     const isCompleted = completedActions.includes(item.id);
 
                     return (
                         <div
                             key={item.id}
                             className={`relative rounded-xl p-4 transition-all duration-300 ${isCompleted
-                                ? 'bg-green-900/20 border border-green-500/30'
-                                : 'bg-dashboard-textSecondary/10 hover:bg-dashboard-textSecondary/20'
+                                ? 'bg-dashboard-textSecondary/10 border border-dashboard-textSecondary/30'
+                                : 'bg-dashboard-textSecondary/5 hover:bg-dashboard-textSecondary/10'
                                 }`}
                         >
                             <div className="flex items-start gap-4">
@@ -343,24 +300,24 @@ const ActionPlanTab = ({ completedActions, onToggleAction }) => {
 
                                 <div className="flex-1">
                                     <div className="flex items-center gap-2 mb-1">
-                                        <h4 className={`font-medium ${isCompleted ? 'text-green-400 line-through' : 'text-dashboard-text'}`}>
+                                        <h4 className={`font-medium ${isCompleted ? 'text-dashboard-textSecondary line-through' : 'text-dashboard-text'}`}>
                                             {item.title}
                                         </h4>
                                         <EffortBadge effort={item.effort} />
                                     </div>
                                     <p className="text-sm text-dashboard-textSecondary mb-2">{item.description}</p>
                                     <div className="flex items-center gap-4 text-sm">
-                                        <span className="text-green-400">Save ₹{item.monthlySavings}/month</span>
+                                        <span className="text-dashboard-text">Save ₹{item.monthlySavings}/month</span>
                                         <span className="text-dashboard-textSecondary">•</span>
-                                        <span className="text-accent">₹{item.annualSavings}/year</span>
+                                        <span className="text-dashboard-textSecondary">₹{item.annualSavings}/year</span>
                                     </div>
                                 </div>
 
                                 <button
                                     onClick={() => onToggleAction(item.id)}
                                     className={`p-2 rounded-lg transition-colors ${isCompleted
-                                        ? 'bg-green-500/20 text-green-400'
-                                        : 'bg-dashboard-textSecondary/15 text-dashboard-textSecondary hover:text-dashboard-text'
+                                        ? 'bg-dashboard-textSecondary/20 text-dashboard-text'
+                                        : 'bg-dashboard-textSecondary/10 text-dashboard-textSecondary hover:text-dashboard-text'
                                         }`}
                                 >
                                     <CheckCircleIcon className="w-6 h-6" />
@@ -376,6 +333,7 @@ const ActionPlanTab = ({ completedActions, onToggleAction }) => {
 
 // Main CostOptimizer Component
 const CostOptimizer = ({ userId = 'user123', onNavigateToControl }) => {
+    const { t } = useTranslation();
     const [activeTab, setActiveTab] = useState(0);
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState({
@@ -391,10 +349,59 @@ const CostOptimizer = ({ userId = 'user123', onNavigateToControl }) => {
     });
 
     const tabs = [
-        { name: 'Your Current Costs', icon: ChartBarIcon },
-        { name: 'What-If Scenarios', icon: CalculatorIcon },
-        { name: 'Action Plan', icon: ClipboardDocumentCheckIcon }
+        { name: t('costOptimizer.yourCurrentCosts'), icon: ChartBarIcon },
+        { name: t('costOptimizer.whatIfScenarios'), icon: CalculatorIcon },
+        { name: t('costOptimizer.actionPlan'), icon: ClipboardDocumentCheckIcon }
     ];
+
+    // Action items with details - Using useMemo for translation
+    const actionItems = useMemo(() => [
+        {
+            id: 1,
+            icon: '🥇',
+            title: t('costOptimizer.shiftAC'),
+            monthlySavings: 167,
+            annualSavings: 2000,
+            effort: 'easy',
+            description: 'Use timer or smart plug to run AC during off-peak hours'
+        },
+        {
+            id: 2,
+            icon: '🥈',
+            title: t('costOptimizer.runWaterHeater'),
+            monthlySavings: 80,
+            annualSavings: 960,
+            effort: 'easy',
+            description: 'Heat water during off-peak and use stored hot water'
+        },
+        {
+            id: 3,
+            icon: '🥉',
+            title: t('costOptimizer.scheduleWashing'),
+            monthlySavings: 40,
+            annualSavings: 480,
+            effort: 'medium',
+            description: 'Use delay start feature on washing machine'
+        },
+        {
+            id: 4,
+            icon: '🏅',
+            title: t('costOptimizer.chargeEV'),
+            monthlySavings: 125,
+            annualSavings: 1500,
+            effort: 'easy',
+            description: 'Schedule EV charging for 12 AM - 5 AM'
+        },
+        {
+            id: 5,
+            icon: '🏅',
+            title: t('costOptimizer.runDishwasher'),
+            monthlySavings: 25,
+            annualSavings: 300,
+            effort: 'easy',
+            description: 'Use delay start or run before bed'
+        }
+    ], [t]);
 
     // Fetch data with caching
     const fetchData = useCallback(async () => {
@@ -478,12 +485,12 @@ const CostOptimizer = ({ userId = 'user123', onNavigateToControl }) => {
             <div className="p-6 border-b border-dashboard-textSecondary/20">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center gap-3">
-                        <div className="p-3 bg-accent/20 rounded-xl">
-                            <CalculatorIcon className="w-6 h-6 text-accent" />
+                        <div className="p-3 bg-dashboard-textSecondary/10 rounded-xl">
+                            <CalculatorIcon className="w-6 h-6 text-dashboard-text" />
                         </div>
                         <div>
-                            <h2 className="text-xl font-bold text-dashboard-text">Cost Optimizer</h2>
-                            <p className="text-sm text-dashboard-textSecondary">Maximize your savings potential</p>
+                            <h2 className="text-xl font-bold text-dashboard-text">{t('costOptimizer.title')}</h2>
+                            <p className="text-sm text-dashboard-textSecondary">{t('costOptimizer.subtitle')}</p>
                         </div>
                     </div>
                     <button
@@ -503,7 +510,7 @@ const CostOptimizer = ({ userId = 'user123', onNavigateToControl }) => {
                         key={idx}
                         onClick={() => setActiveTab(idx)}
                         className={`flex-1 flex items-center justify-center gap-2 px-4 py-4 text-sm font-medium transition-colors ${activeTab === idx
-                            ? 'text-accent border-b-2 border-accent bg-accent/5'
+                            ? 'text-dashboard-text border-b-2 border-dashboard-text bg-dashboard-textSecondary/10'
                             : 'text-dashboard-textSecondary hover:text-dashboard-text hover:bg-dashboard-textSecondary/10'
                             }`}
                     >
@@ -527,6 +534,7 @@ const CostOptimizer = ({ userId = 'user123', onNavigateToControl }) => {
                             <ActionPlanTab
                                 completedActions={completedActions}
                                 onToggleAction={toggleAction}
+                                actionItems={actionItems}
                             />
                         )}
                     </>
@@ -538,17 +546,17 @@ const CostOptimizer = ({ userId = 'user123', onNavigateToControl }) => {
                 <div className="flex flex-col sm:flex-row gap-3">
                     <button
                         onClick={onNavigateToControl}
-                        className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-accent hover:bg-accent/90 rounded-xl transition-colors text-primary-DEFAULT font-medium"
+                        className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-dashboard-text hover:bg-dashboard-text/90 rounded-xl transition-colors text-dashboard-card font-medium"
                     >
                         <CogIcon className="w-5 h-5" />
-                        Enable Smart Scheduling
+                        {t('costOptimizer.enableSmartScheduling')}
                     </button>
                     <button
                         onClick={handlePrint}
                         className="flex items-center justify-center gap-2 px-6 py-3 bg-dashboard-textSecondary/15 hover:bg-dashboard-textSecondary/25 rounded-xl transition-colors text-dashboard-text font-medium"
                     >
                         <PrinterIcon className="w-5 h-5" />
-                        Print Plan
+                        {t('costOptimizer.printPlan')}
                     </button>
                 </div>
             </div>

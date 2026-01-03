@@ -123,7 +123,19 @@
         "confidence": "Confidence",
         "whatIfCalculator": "What-If Calculator",
         "whatIfReduceAC": "What if I reduce AC usage by {{percent}}%?",
-        "calculateSavings": "Calculate Savings"
+        "calculateSavings": "Calculate Savings",
+        "sevenDayForecast": "7-Day Forecast",
+        "normal": "Normal",
+        "high": "High",
+        "dayType": "Day Type",
+        "peakUsage": "Peak Usage",
+        "range": "Range",
+        "subsidyTracking": "Subsidy Tracking",
+        "overBy": "Over by",
+        "withinLimit": "Within limit",
+        "free": "Free",
+        "projected": "Projected",
+        "extraCost": "Extra cost"
     },
     "appliances": {
         "title": "Appliance Breakdown",
@@ -139,7 +151,9 @@
     "peakHours": {
         "smartTariffSavings": "Smart Tariff Savings",
         "offPeakHours": "Off-Peak Hours",
+        "peakHours": "Peak Hours",
         "untilPeakHours": "until peak hours",
+        "untilOffPeakRate": "until off-peak rates",
         "currentPower": "Current Power",
         "hourlyCost": "Hourly Cost",
         "shiftToOffPeak": "Shift to Off-Peak & Save",
@@ -149,7 +163,14 @@
         "chargeOvernight": "Charge overnight",
         "hourForecast": "24-Hour Forecast",
         "viewSchedule": "View Schedule",
-        "nextOffPeak": "Next Off-Peak"
+        "nextOffPeak": "Next Off-Peak",
+        "savingsCalculator": "Savings Calculator",
+        "dailyConsumption": "Daily Consumption (Wh)",
+        "percentUsagePeak": "% Usage During Peak Hours",
+        "currentDailyCost": "Current Daily Cost",
+        "potentialDailySavings": "Potential Daily Savings",
+        "savingsShifted": "Savings if shifted to off-peak",
+        "shiftToSave": "Shift to Off-Peak & Save"
     },
     "costOptimizer": {
         "title": "Cost Optimizer",
@@ -162,7 +183,24 @@
         "costBreakdown": "Cost Breakdown",
         "peakVsOffPeak": "Peak vs Off-Peak Visualization",
         "enableSmartScheduling": "Enable Smart Scheduling",
-        "printPlan": "Print Plan"
+        "printPlan": "Print Plan",
+        "yourProgress": "Your Progress",
+        "actionsCompleted": "actions completed",
+        "annualSavingsUnlocked": "annual savings unlocked",
+        "adjustPeakReduction": "Adjust Peak Usage Reduction",
+        "reducePeakBy": "Reduce peak usage by:",
+        "monthlySavings": "Monthly Savings",
+        "annualSavings": "Annual Savings",
+        "quickScenarios": "Quick Scenarios",
+        "shiftAppliance": "Shift {{percent}}% of {{appliance}}",
+        "moveToOffPeak": "Move to off-peak hours",
+        "totalPotential": "Total Potential Savings",
+        "annual": "Annual",
+        "shiftAC": "Shift AC to 11 PM - 6 AM",
+        "runWaterHeater": "Run water heater after midnight",
+        "scheduleWashing": "Schedule washing for 1-2 AM",
+        "chargeEV": "Charge EV overnight",
+        "runDishwasher": "Run dishwasher after 11 PM"
     },
     "aiInsight": {
         "title": "AI Insight",

@@ -10,7 +10,14 @@
         "offPeakHours": "ਆਫ-ਪੀਕ ਘੰਟੇ",
         "savingsToday": "ਅੱਜ ਦੀ ਬੱਚਤ",
         "powerFactor": "ਪਾਵਰ ਫੈਕਟਰ",
-        "liveConsumption": "ਲਾਈਵ ਖਪਤ"
+        "liveConsumption": "ਲਾਈਵ ਖਪਤ",
+        "quickControls": "ਤੁਰੰਤ ਕੰਟਰੋਲ",
+        "active": "ਸਰਗਰਮ",
+        "realtimePowerMonitor": "ਰੀਅਲ-ਟਾਈਮ ਪਾਵਰ ਮਾਨੀਟਰ",
+        "liveView": "ਲਾਈਵ ਵਿਊ",
+        "predictionAccuracy": "ਭਵਿੱਖਬਾਣੀ ਸ਼ੁੱਧਤਾ",
+        "liveDraw": "ਲਾਈਵ ਡਰਾਅ",
+        "peakPrediction": "ਪੀਕ ਭਵਿੱਖਬਾਣੀ"
     },
     "analytics": {
         "title": "ਵਿਸ਼ਲੇਸ਼ਣ",
@@ -19,13 +26,34 @@
         "current": "ਕਰੰਟ",
         "power": "ਪਾਵਰ",
         "frequency": "ਫ੍ਰੀਕੁਐਂਸੀ",
+        "energy": "ਊਰਜਾ",
+        "cost": "ਲਾਗਤ",
+        "pf": "ਪੀਐਫ",
         "anomalies": "ਅਸਧਾਰਨਤਾਵਾਂ",
         "detected": "ਲੱਭਿਆ",
         "resolved": "ਹੱਲ ਕੀਤਾ",
         "trends": "ਰੁਝਾਨ",
         "weeklyExpenditure": "ਹਫ਼ਤਾਵਾਰੀ ਖਰਚਾ",
         "viewReport": "ਰਿਪੋਰਟ ਵੇਖੋ",
-        "totalThisWeek": "ਇਸ ਹਫ਼ਤੇ ਕੁੱਲ"
+        "totalThisWeek": "ਇਸ ਹਫ਼ਤੇ ਕੁੱਲ",
+        "vsLastWeek": "ਪਿਛਲੇ ਹਫ਼ਤੇ ਦੇ ਮੁਕਾਬਲੇ",
+        "detectedIssues": "ਲੱਭੇ ਗਏ ਮੁੱਦੇ (ਪਿਛਲੇ 7 ਦਿਨ)",
+        "anomaliesDetected": "ਅਸਧਾਰਨਤਾਵਾਂ ਲੱਭੀਆਂ",
+        "noAnomaliesDetected": "ਕੋਈ ਅਸਧਾਰਨਤਾ ਨਹੀਂ ਲੱਭੀ",
+        "anomaliesOverTime": "ਸਮੇਂ ਦੇ ਨਾਲ ਅਸਧਾਰਨਤਾਵਾਂ",
+        "anomalyRateStable": "ਅਸਧਾਰਨਤਾ ਦਰ ਸਥਿਰ ਹੈ",
+        "aiRecommendations": "AI ਸਿਫ਼ਾਰਸ਼ਾਂ",
+        "noSpecificConcerns": "ਕੋਈ ਖਾਸ ਚਿੰਤਾ ਨਹੀਂ। ਤੁਹਾਡੇ ਵਰਤੋਂ ਪੈਟਰਨ ਸਿਹਤਮੰਦ ਲੱਗਦੇ ਹਨ!",
+        "scheduleHealthCheck": "ਉਪਕਰਣ ਸਿਹਤ ਜਾਂਚ ਤਹਿ ਕਰੋ",
+        "comingSoon": "ਜਲਦੀ ਆ ਰਿਹਾ ਹੈ",
+        "energyBreakdown": "ਊਰਜਾ ਵੰਡ",
+        "simulatedDistribution": "ਸਿਮੂਲੇਟਿਡ ਵੰਡ",
+        "total": "ਕੁੱਲ",
+        "lighting": "ਲਾਈਟਿੰਗ",
+        "acHvac": "AC / HVAC",
+        "appliances": "ਉਪਕਰਣ",
+        "others": "ਹੋਰ",
+        "costAnalytics": "ਲਾਗਤ ਵਿਸ਼ਲੇਸ਼ਣ"
     },
     "control": {
         "title": "ਕੰਟਰੋਲ",
@@ -35,7 +63,11 @@
         "on": "ਚਾਲੂ",
         "off": "ਬੰਦ",
         "schedule": "ਸ਼ੈਡਿਊਲ",
-        "automation": "ਆਟੋਮੇਸ਼ਨ"
+        "automation": "ਆਟੋਮੇਸ਼ਨ",
+        "livingRoomLights": "ਲਿਵਿੰਗ ਰੂਮ ਲਾਈਟਾਂ",
+        "acMasterBedroom": "AC ਮਾਸਟਰ ਬੈੱਡਰੂਮ",
+        "smartTV": "ਸਮਾਰਟ TV",
+        "workstation": "ਵਰਕਸਟੇਸ਼ਨ"
     },
     "settings": {
         "title": "ਸੈਟਿੰਗਾਂ",
@@ -50,7 +82,10 @@
         "lightMode": "ਲਾਈਟ ਮੋਡ"
     },
     "chat": {
+        "greeting": "ਸਤ ਸ੍ਰੀ ਅਕਾਲ! ਮੈਂ SHEM ਹਾਂ",
+        "greetingSubtext": "ਤੁਹਾਡਾ AI ਊਰਜਾ ਸਲਾਹਕਾਰ। ਆਪਣੀ ਬਿਜਲੀ ਵਰਤੋਂ ਬਾਰੇ ਕੁਝ ਵੀ ਪੁੱਛੋ!",
         "askShem": "SHEM ਨੂੰ ਪੁੱਛੋ",
+        "energyAdvisor": "SHEM - ਊਰਜਾ ਸਲਾਹਕਾਰ",
         "placeholder": "ਆਪਣੀ ਊਰਜਾ ਵਰਤੋਂ ਬਾਰੇ ਪੁੱਛੋ...",
         "thinking": "SHEM ਸੋਚ ਰਿਹਾ ਹੈ...",
         "rateLimited": "ਦਰ ਸੀਮਿਤ। ਇੱਕ ਘੰਟੇ ਬਾਅਦ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
@@ -58,27 +93,80 @@
         "retry": "ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
         "settings": "ਚੈਟ ਸੈਟਿੰਗਾਂ",
         "clearHistory": "ਇਤਿਹਾਸ ਸਾਫ਼ ਕਰੋ",
-        "privacyNote": "ਤੁਹਾਡੀ ਚੈਟ ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ ਪ੍ਰੋਸੈਸ ਕੀਤੀ ਜਾਂਦੀ ਹੈ।",
+        "privacyNote": "ਤੁਹਾਡੀ ਚੈਟ ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ ਪ੍ਰੋਸੈਸ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਨਿੱਜੀ ਡੇਟਾ ਸਟੋਰ ਨਹੀਂ ਕਰਦੇ।",
         "tellMeMore": "ਹੋਰ ਦੱਸੋ",
         "howToDoThis": "ਇਹ ਕਿਵੇਂ ਕਰਨਾ ਹੈ?",
-        "whatElse": "ਹੋਰ ਕੀ?"
+        "whatElse": "ਹੋਰ ਕੀ?",
+        "consumptionTrend": "ਮੇਰੀ ਖਪਤ ਦਾ ਰੁਝਾਨ ਕੀ ਹੈ?",
+        "whichHourCostsMost": "ਕਿਹੜਾ ਘੰਟਾ ਮੈਨੂੰ ਸਭ ਤੋਂ ਵੱਧ ਖਰਚ ਕਰਦਾ ਹੈ?",
+        "anyAnomalies": "ਕੀ ਕੋਈ ਅਸਧਾਰਨਤਾਵਾਂ ਹਨ?",
+        "whyBillHigh": "ਮੇਰਾ ਬਿੱਲ ਉੱਚਾ ਕਿਉਂ ਹੈ?",
+        "scheduleAC": "ਮੇਰਾ AC ਕਿਵੇਂ ਤਹਿ ਕਰੀਏ?",
+        "bestTimeWashingMachine": "ਵਾਸ਼ਿੰਗ ਮਸ਼ੀਨ ਚਲਾਉਣ ਦਾ ਸਭ ਤੋਂ ਵਧੀਆ ਸਮਾਂ?",
+        "optimizeDeviceUsage": "ਮੇਰੇ ਡਿਵਾਈਸ ਵਰਤੋਂ ਨੂੰ ਅਨੁਕੂਲ ਬਣਾਓ"
     },
     "forecast": {
         "title": "ਊਰਜਾ ਭਵਿੱਖਬਾਣੀ",
+        "refresh": "ਰਿਫ੍ਰੈਸ਼",
+        "collectingData": "ਸਟੀਕ ਭਵਿੱਖਬਾਣੀਆਂ ਲਈ ਡੇਟਾ ਇਕੱਠਾ ਕਰ ਰਿਹਾ ਹੈ...",
+        "needMoreDays": "{{days}} ਹੋਰ ਦਿਨਾਂ ਦੇ ਡੇਟਾ ਦੀ ਲੋੜ",
         "tomorrow": "ਕੱਲ੍ਹ ਦੀ ਭਵਿੱਖਬਾਣੀ",
         "weeklyForecast": "ਹਫ਼ਤਾਵਾਰੀ ਭਵਿੱਖਬਾਣੀ",
         "monthlyProjection": "ਮਹੀਨਾਵਾਰ ਪ੍ਰੋਜੈਕਸ਼ਨ",
+        "soFar": "ਹੁਣ ਤੱਕ",
+        "forecasted": "ਭਵਿੱਖਬਾਣੀ ਕੀਤੀ",
+        "daysLeft": "ਦਿਨ ਬਾਕੀ",
+        "projectedTotal": "ਅਨੁਮਾਨਿਤ ਕੁੱਲ",
+        "vsLastMonth": "ਪਿਛਲੇ ਮਹੀਨੇ ਦੇ ਮੁਕਾਬਲੇ",
         "predictedUsage": "ਅਨੁਮਾਨਿਤ ਵਰਤੋਂ",
         "estimatedCost": "ਅਨੁਮਾਨਿਤ ਲਾਗਤ",
-        "confidence": "ਭਰੋਸਾ"
+        "confidence": "ਭਰੋਸਾ",
+        "whatIfCalculator": "ਕੀ-ਜੇ ਕੈਲਕੁਲੇਟਰ",
+        "whatIfReduceAC": "ਜੇ ਮੈਂ AC ਵਰਤੋਂ {{percent}}% ਘਟਾਵਾਂ?",
+        "calculateSavings": "ਬੱਚਤ ਦੀ ਗਣਨਾ ਕਰੋ"
     },
     "appliances": {
-        "title": "ਉਪਕਰਣ",
+        "title": "ਉਪਕਰਣ ਵੰਡ",
         "breakdown": "ਅਨੁਮਾਨਿਤ ਉਪਕਰਣ ਵੰਡ",
+        "learningPatterns": "ਤੁਹਾਡੇ ਪੈਟਰਨ ਸਿੱਖ ਰਿਹਾ ਹੈ",
+        "needMoreData": "ਤੁਹਾਡੇ ਉਪਕਰਣਾਂ ਦੀ ਸਹੀ ਪਛਾਣ ਕਰਨ ਲਈ ਸਾਨੂੰ ਲਗਭਗ {{days}} ਹੋਰ ਦਿਨਾਂ ਦੇ ਡੇਟਾ ਦੀ ਲੋੜ ਹੈ।",
+        "dataPointsCollected": "{{current}} / {{total}} ਡੇਟਾ ਪੁਆਇੰਟ ਇਕੱਠੇ ਕੀਤੇ",
         "detected": "ਲੱਭੇ ਉਪਕਰਣ",
         "unidentified": "ਅਣਪਛਾਤੀ ਖਪਤ",
         "addManually": "ਹੱਥੀਂ ਉਪਕਰਣ ਜੋੜੋ",
         "waysToSave": "ਪੈਸੇ ਬਚਾਉਣ ਦੇ ਤਰੀਕੇ"
+    },
+    "peakHours": {
+        "smartTariffSavings": "ਸਮਾਰਟ ਟੈਰਿਫ ਬੱਚਤ",
+        "offPeakHours": "ਆਫ-ਪੀਕ ਘੰਟੇ",
+        "untilPeakHours": "ਪੀਕ ਘੰਟਿਆਂ ਤੱਕ",
+        "currentPower": "ਮੌਜੂਦਾ ਪਾਵਰ",
+        "hourlyCost": "ਪ੍ਰਤੀ ਘੰਟਾ ਲਾਗਤ",
+        "shiftToOffPeak": "ਆਫ-ਪੀਕ 'ਤੇ ਜਾਓ ਅਤੇ ਬਚਾਓ",
+        "runAtNight": "ਰਾਤ 11 - ਸਵੇਰੇ 6 ਵਜੇ ਚਲਾਓ",
+        "useAfterMidnight": "ਅੱਧੀ ਰਾਤ ਤੋਂ ਬਾਅਦ ਵਰਤੋ",
+        "scheduleEarly": "ਸਵੇਰੇ 1-2 ਵਜੇ ਤਹਿ ਕਰੋ",
+        "chargeOvernight": "ਰਾਤ ਭਰ ਚਾਰਜ ਕਰੋ",
+        "hourForecast": "24-ਘੰਟੇ ਦੀ ਭਵਿੱਖਬਾਣੀ",
+        "viewSchedule": "ਸ਼ੈਡਿਊਲ ਵੇਖੋ",
+        "nextOffPeak": "ਅਗਲਾ ਆਫ-ਪੀਕ"
+    },
+    "costOptimizer": {
+        "title": "ਲਾਗਤ ਅਨੁਕੂਲਕ",
+        "subtitle": "ਆਪਣੀ ਬੱਚਤ ਸਮਰੱਥਾ ਨੂੰ ਵੱਧ ਤੋਂ ਵੱਧ ਕਰੋ",
+        "yourCurrentCosts": "ਤੁਹਾਡੇ ਮੌਜੂਦਾ ਖਰਚੇ",
+        "whatIfScenarios": "ਕੀ-ਜੇ ਦ੍ਰਿਸ਼",
+        "actionPlan": "ਕਾਰਵਾਈ ਯੋਜਨਾ",
+        "totalConsumption": "ਕੁੱਲ ਖਪਤ",
+        "totalCost": "ਕੁੱਲ ਲਾਗਤ",
+        "costBreakdown": "ਲਾਗਤ ਵੰਡ",
+        "peakVsOffPeak": "ਪੀਕ ਬਨਾਮ ਆਫ-ਪੀਕ ਵਿਜ਼ੂਅਲਾਈਜ਼ੇਸ਼ਨ",
+        "enableSmartScheduling": "ਸਮਾਰਟ ਸ਼ੈਡਿਊਲਿੰਗ ਯੋਗ ਕਰੋ",
+        "printPlan": "ਯੋਜਨਾ ਪ੍ਰਿੰਟ ਕਰੋ"
+    },
+    "aiInsight": {
+        "title": "AI ਇਨਸਾਈਟ",
+        "analyzing": "ਤੁਹਾਡੇ ਊਰਜਾ ਪੈਟਰਨਾਂ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰ ਰਿਹਾ ਹੈ..."
     },
     "common": {
         "loading": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ...",
@@ -90,7 +178,17 @@
         "edit": "ਸੋਧੋ",
         "refresh": "ਰਿਫ੍ਰੈਸ਼",
         "viewAll": "ਸਭ ਵੇਖੋ",
-        "moreLanguages": "ਹੋਰ ਭਾਸ਼ਾਵਾਂ..."
+        "moreLanguages": "ਹੋਰ ਭਾਸ਼ਾਵਾਂ...",
+        "units": "ਯੂਨਿਟ",
+        "days": "ਦਿਨ",
+        "hours": "ਘੰਟੇ",
+        "minutes": "ਮਿੰਟ",
+        "now": "ਹੁਣ",
+        "ac": "AC",
+        "waterHeater": "ਵਾਟਰ ਹੀਟਰ",
+        "washingMachine": "ਵਾਸ਼ਿੰਗ ਮਸ਼ੀਨ",
+        "evCharging": "EV ਚਾਰਜਿੰਗ",
+        "perDay": "/ਦਿਨ"
     },
     "units": {
         "watts": "W",
@@ -99,6 +197,7 @@
         "volts": "V",
         "amperes": "A",
         "rupees": "₹",
-        "percentage": "%"
+        "percentage": "%",
+        "hz": "Hz"
     }
 }

@@ -27,6 +27,26 @@ const AnomalyAlerts = lazy(() => import('./dashboard/neo/AnomalyAlerts'));
 const ApplianceBreakdown = lazy(() => import('./dashboard/neo/ApplianceBreakdown'));
 const EnergyForecast = lazy(() => import('./dashboard/neo/EnergyForecast'));
 
+import {
+  ChartBarIcon,
+  BoltIcon,
+  ArrowTrendingUpIcon,
+  SparklesIcon,
+  AdjustmentsVerticalIcon
+} from '@heroicons/react/24/outline';
+
+const SectionHeader = ({ icon: Icon, title, subtitle }) => (
+  <div className="mb-8">
+    <div className="flex items-center gap-3 mb-1">
+      <div className="p-2 bg-white/5 rounded-lg border border-white/10">
+        <Icon className="w-5 h-5 text-dashboard-text" />
+      </div>
+      <h2 className="text-xl font-bold text-dashboard-text tracking-tight">{title}</h2>
+    </div>
+    {subtitle && <p className="text-sm text-dashboard-textSecondary ml-11">{subtitle}</p>}
+  </div>
+);
+
 // Simple widget loader
 const WidgetLoader = () => (
   <div className="h-full w-full min-h-[200px] flex items-center justify-center bg-white/5 rounded-xl animate-pulse">
@@ -41,6 +61,7 @@ const Dashboard = () => {
 
   // State
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [dashboardSubTab, setDashboardSubTab] = useState('monitoring');
   const [esp32Data, setEsp32Data] = useState(null);
 
   // Fetch ESP32 Data
@@ -69,40 +90,95 @@ const Dashboard = () => {
     switch (activeTab) {
       case 'dashboard':
         return (
-          <div className="space-y-6 fade-in">
-            {/* Simple Metrics */}
-            <section>
-              <h2 className="text-xl font-bold text-dashboard-text mb-4">Overview</h2>
-              <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-6">
-                <div className="lg:col-span-3">
-                  <MetricCards data={esp32Data || liveData} />
+          <div className="fade-in space-y-8">
+            {/* Sub-section Navigation */}
+            <div className="flex gap-1 p-1 bg-white/5 rounded-xl border border-white/10 w-fit mx-auto sticky top-4 z-40 backdrop-blur-md">
+              {[
+                { id: 'monitoring', label: 'Monitoring', icon: BoltIcon },
+                { id: 'savings', label: 'Savings', icon: AdjustmentsVerticalIcon },
+                { id: 'forecasting', label: 'Forecasting', icon: ArrowTrendingUpIcon },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setDashboardSubTab(tab.id)}
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200
+                    ${dashboardSubTab === tab.id
+                      ? 'bg-white text-black shadow-lg scale-[1.02]'
+                      : 'text-dashboard-textSecondary hover:text-white hover:bg-white/5'
+                    }`}
+                >
+                  <tab.icon className={`w-4 h-4 ${dashboardSubTab === tab.id ? 'text-black' : 'text-dashboard-textSecondary'}`} />
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="fade-in">
+              {dashboardSubTab === 'monitoring' && (
+                <div className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  {/* Energy Overview Sub-section */}
+                  <section>
+                    <SectionHeader
+                      icon={ChartBarIcon}
+                      title="Energy Overview"
+                      subtitle="Real-time performance and AI-driven insights"
+                    />
+                    <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
+                      <div className="xl:col-span-3">
+                        <MetricCards data={esp32Data || liveData} />
+                      </div>
+                      <div className="xl:col-span-1">
+                        <AiInsights data={esp32Data || liveData} />
+                      </div>
+                    </div>
+                  </section>
+
+                  {/* Live Monitoring & Controls Sub-section */}
+                  <section>
+                    <SectionHeader
+                      icon={BoltIcon}
+                      title="Live Monitoring & Controls"
+                      subtitle="Track consumption as it happens and manage devices"
+                    />
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                      <div className="lg:col-span-2">
+                        <LivePowerChart liveData={esp32Data || liveData} />
+                      </div>
+                      <div className="flex flex-col">
+                        <NeoDeviceControl />
+                      </div>
+                    </div>
+                  </section>
                 </div>
-                <div className="lg:col-span-1">
-                  <AiInsights data={esp32Data || liveData} />
-                </div>
-              </div>
-            </section>
+              )}
 
-            {/* Live Chart & Quick Control */}
-            <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2">
-                <LivePowerChart liveData={esp32Data || liveData} />
-              </div>
-              <div>
-                <NeoDeviceControl />
-              </div>
-            </section>
+              {dashboardSubTab === 'savings' && (
+                <section className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <SectionHeader
+                    icon={AdjustmentsVerticalIcon}
+                    title="Smart Savings & Optimization"
+                    subtitle="Avoid peak rates and optimize your energy budget"
+                  />
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                    <PeakHoursCard data={esp32Data || liveData} userId={user?.id || 'user123'} />
+                    <CostOptimizer userId={user?.id || 'user123'} onNavigateToControl={() => setActiveTab('control')} />
+                  </div>
+                </section>
+              )}
 
-            {/* Peak Hours & Savings */}
-            <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <PeakHoursCard data={esp32Data || liveData} userId={user?.id || 'user123'} />
-              <CostOptimizer userId={user?.id || 'user123'} onNavigateToControl={() => setActiveTab('control')} />
-            </section>
-
-            {/* Energy Forecast */}
-            <section>
-              <EnergyForecast userId={user?.id || 'user123'} />
-            </section>
+              {dashboardSubTab === 'forecasting' && (
+                <section className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <SectionHeader
+                    icon={ArrowTrendingUpIcon}
+                    title="Forecasting & Simulation"
+                    subtitle="Future-ready insights and cost projections"
+                  />
+                  <div className="space-y-8">
+                    <EnergyForecast userId={user?.id || 'user123'} />
+                  </div>
+                </section>
+              )}
+            </div>
           </div>
         );
 
@@ -183,7 +259,7 @@ const Dashboard = () => {
               ${t.type === 'error' ? 'bg-red-900/80' : 'bg-[#252836]'}
               border border-white/10 text-white p-4 rounded-xl shadow-lg flex items-center gap-3 min-w-[300px] backdrop-blur-md transition-all
               ${t.visible ? 'animate-enter' : 'animate-leave'}
-           `}>
+`}>
             <div className="flex-1">{t.message}</div>
             {t.type !== 'loading' && (
               <button onClick={() => toast.dismiss(t.id)} className="p-1 hover:bg-white/10 rounded-full transition-colors">

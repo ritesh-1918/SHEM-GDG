@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Magic Link</title>
+  <style>
+    /* Reset & Base */
+    body { margin: 0; padding: 0; background-color: #1a1d29; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #ffffff; }
+    table { border-spacing: 0; width: 100%; max-width: 600px; margin: 0 auto; }
+    
+    /* Container */
+    .container {
+      background-color: #1a1d29;
+      padding: 40px 20px;
+    }
+    
+    /* Card */
+    .card {
+      background-color: #252836;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      border: 1px solid #333645;
+      text-align: center;
+    }
+    
+    /* Typography */
+    h1 { margin: 0 0 24px; font-size: 28px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px; }
+    p { margin: 0 0 24px; font-size: 16px; line-height: 1.6; color: #8a8d9c; }
+    .code { font-family: monospace; font-size: 32px; letter-spacing: 8px; color: #f7b529; font-weight: bold; margin: 24px 0; display: block;}
+    
+    /* Button */
+    .btn {
+      display: inline-block;
+      background-color: #f7b529;
+      color: #1a1d29;
+      padding: 16px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.9; }
+    
+    /* Footer */
+    .footer {
+      margin-top: 32px;
+      font-size: 12px;
+      color: #555866;
+      text-align: center;
+    }
+    .footer a { color: #8a8d9c; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <table class="card">
+      <tr>
+        <td>
+          <!-- Logo / Header -->
+          <div style="font-size: 24px; font-weight: 800; color: #f7b529; margin-bottom: 32px;">SHEM</div>
+          
+          <!-- Main Content -->
+          <h1>Sign in to SHEM</h1>
+          <p>Click the button below to sign in to your dashboard.<br>This link expires in 5 minutes.</p>
+          
+          <!-- Magic Link Button -->
+          <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=magiclink" class="btn">Sign In Now</a>
+          
+          <p style="margin-top: 32px; font-size: 14px;">Or copy this login code if you requested one:</p>
+          <span class="code">{{ .Token }}</span>
+          
+        </td>
+      </tr>
+    </table>
+    
+    <!-- Footer -->
+    <div class="footer">
+      <p>&copy; 2024 SHEM Energy Manager. All rights reserved.</p>
+      <p>If you didn't request this email, you can safely ignore it.</p>
+    </div>
+  </div>
+</body>
+</html>

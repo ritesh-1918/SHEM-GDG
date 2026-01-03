@@ -8,7 +8,7 @@ import { ArrowRightIcon } from '@heroicons/react/24/outline';
 
 const RegistrationForm = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 transition-colors duration-500 relative">
+    <div className="min-h-screen flex items-center justify-center bg-white transition-colors duration-500 relative">
       <Link to="/" className="fixed top-4 left-4 md:top-8 md:left-8 z-50 flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors bg-white/80 dark:bg-gray-900/80 backdrop-blur-md px-4 py-2 rounded-full shadow-sm hover:shadow-md group">
         <ArrowRightIcon className="h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" />
         <span className="font-medium">Home</span>

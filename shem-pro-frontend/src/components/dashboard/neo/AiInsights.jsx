@@ -23,13 +23,15 @@ const AiInsights = ({ data }) => {
 
     return (
         <div className="bg-gradient-to-r from-indigo-900/50 to-purple-900/50 rounded-xl p-6 border border-dashboard-textSecondary/20 relative overflow-hidden text-dashboard-text">
-            <div className="absolute top-0 right-0 p-4 opacity-10">
-                <SparklesIcon className="w-24 h-24 text-white" />
+            <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+                <img src="/favicon.png" alt="SHEM Logo" className="w-32 h-32 object-contain" />
             </div>
 
             <div className="flex justify-between items-start mb-4 relative z-10">
                 <div className="flex items-center gap-2">
-                    <SparklesIcon className="w-5 h-5 text-accent" />
+                    <div className="p-2 bg-accent/10 rounded-lg">
+                        <img src="/favicon.png" alt="SHEM Logo" className="w-5 h-5 object-contain" />
+                    </div>
                     <h3 className="font-bold">{t('aiInsight.title')}</h3>
                 </div>
                 <button

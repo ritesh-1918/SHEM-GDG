@@ -15,6 +15,7 @@
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^5.2.2",
     "@responsive-image/react": "^1.1.4",
+    "@supabase/supabase-js": "^2.89.0",
     "axios": "^1.13.2",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.24",

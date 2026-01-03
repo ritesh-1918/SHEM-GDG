@@ -1,20 +1,22 @@
-const EnergyData = require('../models/EnergyData');
-const User = require('../models/User');
+const supabase = require('../supabaseClient');
 
 exports.postData = async (req, res) => {
   const { voltage, current, power, energy } = req.body;
 
   try {
-    const newEnergyData = new EnergyData({
-      device: req.user.id,
-      voltage,
-      current,
-      power,
-      energy,
-    });
+    const { data, error } = await supabase
+      .from('energy_readings')
+      .insert([{
+        device: req.user.id, // Store user ID as device identifier for now context
+        voltage,
+        current,
+        power,
+        energy_kwh: energy
+      }])
+      .select();
 
-    const energyData = await newEnergyData.save();
-    res.json(energyData);
+    if (error) throw error;
+    res.json(data[0]);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -23,14 +25,14 @@ exports.postData = async (req, res) => {
 
 exports.getLatestData = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
-    if (!user) return res.status(404).json({ msg: 'User not found' });
+    const { data: latestData, error } = await supabase
+      .from('energy_readings')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single();
 
-    const latestData = await EnergyData.findOne({ device: req.user.id })
-                                        .sort({ timestamp: -1 });
-
-    if (!latestData) return res.status(404).json({ msg: 'No data found for this device' });
-
+    if (error || !latestData) return res.status(404).json({ msg: 'No data found' });
     res.json(latestData);
   } catch (err) {
     console.error(err.message);
@@ -40,21 +42,31 @@ exports.getLatestData = async (req, res) => {
 
 exports.getLiveSensorData = async (req, res) => {
   try {
-    const latestData = await EnergyData.findOne({ device: req.user.id })
-                                        .sort({ timestamp: -1 });
+    const { data: latestESP32 } = await supabase
+      .from('energy_readings')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single();
 
-    if (!latestData) {
-      // If no real data, provide mock data for demonstration
+    if (latestESP32) {
       return res.json({
-        voltage: 230 + Math.random() * 10 - 5, // Simulate minor fluctuations
-        current: 5.2 + Math.random() * 0.5 - 0.25,
-        power: 1200 + Math.random() * 100 - 50,
-        energy: 3.5 + Math.random() * 0.1 - 0.05,
-        timestamp: new Date().toISOString()
+        voltage: latestESP32.voltage,
+        current: latestESP32.current,
+        power: latestESP32.power,
+        energy: latestESP32.energy_kwh,
+        timestamp: latestESP32.created_at
       });
     }
 
-    res.json(latestData);
+    // Mock Fallback
+    return res.json({
+      voltage: 230 + Math.random() * 10 - 5,
+      current: 5.2 + Math.random() * 0.5 - 0.25,
+      power: 1200 + Math.random() * 100 - 50,
+      energy: 3.5 + Math.random() * 0.1 - 0.05,
+      timestamp: new Date().toISOString()
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -63,13 +75,13 @@ exports.getLiveSensorData = async (req, res) => {
 
 exports.getHistoryData = async (req, res) => {
   try {
-    const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    const { data: historyData, error } = await supabase
+      .from('energy_readings')
+      .select('*')
+      .order('created_at', { ascending: true })
+      .limit(100); // Limit to last 100 readings for graph
 
-    const historyData = await EnergyData.find({
-      device: req.user.id,
-      timestamp: { $gte: twentyFourHoursAgo }
-    }).sort({ timestamp: 1 });
-
+    if (error) throw error;
     res.json(historyData);
   } catch (err) {
     console.error(err.message);

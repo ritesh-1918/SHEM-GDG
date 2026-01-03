@@ -12,6 +12,7 @@ import {
     ExclamationTriangleIcon,
     CheckCircleIcon
 } from '@heroicons/react/24/solid';
+import { useTranslation } from 'react-i18next';
 import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
     AreaChart, Area, ReferenceLine
@@ -58,11 +59,12 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 // Next Day Forecast Card
 const NextDayCard = ({ forecast, loading }) => {
+    const { t } = useTranslation();
     if (loading) {
         return (
-            <div className="bg-gradient-to-br from-blue-900/40 to-indigo-900/40 rounded-2xl p-6 border border-dashboard-textSecondary/20 animate-pulse">
+            <div className="bg-dashboard-card rounded-2xl p-6 border border-dashboard-textSecondary/20 animate-pulse">
                 <div className="h-32 flex items-center justify-center">
-                    <ArrowPathIcon className="w-8 h-8 text-accent animate-spin" />
+                    <ArrowPathIcon className="w-8 h-8 text-dashboard-text animate-spin" />
                 </div>
             </div>
         );
@@ -73,10 +75,10 @@ const NextDayCard = ({ forecast, loading }) => {
             <div className="bg-gradient-to-br from-blue-900/40 to-indigo-900/40 rounded-2xl p-6 border border-dashboard-textSecondary/20">
                 <div className="text-center py-8">
                     <CalendarDaysIcon className="w-12 h-12 text-accent/50 mx-auto mb-3" />
-                    <p className="text-dashboard-textSecondary">Collecting data for accurate forecasts...</p>
+                    <p className="text-dashboard-textSecondary">{t('forecast.collectingData')}</p>
                     {forecast?.daysNeeded && (
                         <p className="text-xs text-dashboard-textSecondary mt-2">
-                            Need {forecast.daysNeeded} more days of data
+                            {t('forecast.needMoreDays', { days: forecast.daysNeeded })}
                         </p>
                     )}
                 </div>
@@ -88,11 +90,11 @@ const NextDayCard = ({ forecast, loading }) => {
     const weather = forecast.weather;
 
     return (
-        <div className="bg-gradient-to-br from-blue-900/40 to-indigo-900/40 rounded-2xl p-6 border border-dashboard-textSecondary/20">
+        <div className="bg-dashboard-card rounded-2xl p-6 border border-dashboard-textSecondary/20">
             <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-bold text-dashboard-text flex items-center gap-2">
-                    <CalendarDaysIcon className="w-5 h-5 text-accent" />
-                    Tomorrow's Forecast
+                    <CalendarDaysIcon className="w-5 h-5 text-dashboard-text" />
+                    {t('forecast.tomorrow')}
                 </h3>
                 <div className="flex items-center gap-2 text-dashboard-textSecondary text-sm">
                     <span>{getWeatherIcon(weather?.condition)}</span>
@@ -103,19 +105,19 @@ const NextDayCard = ({ forecast, loading }) => {
             <div className="grid grid-cols-2 gap-4 mb-4">
                 {/* Main Prediction */}
                 <div className="bg-dashboard-textSecondary/10 rounded-xl p-4 text-center">
-                    <p className="text-4xl font-bold text-accent mb-1">{consumption.total}</p>
-                    <p className="text-sm text-dashboard-textSecondary">kWh predicted</p>
-                    <p className="text-xs text-green-400 mt-2">{consumption.confidence} confident</p>
+                    <p className="text-4xl font-bold text-dashboard-text mb-1">{consumption.total}</p>
+                    <p className="text-sm text-dashboard-textSecondary">kWh {t('forecast.predictedUsage')}</p>
+                    <p className="text-xs text-dashboard-textSecondary mt-2">{consumption.confidence} {t('forecast.confidence')}</p>
                 </div>
 
                 {/* Cost & Range */}
                 <div className="bg-dashboard-textSecondary/10 rounded-xl p-4">
                     <div className="mb-3">
-                        <p className="text-xs text-dashboard-textSecondary">Estimated Cost</p>
+                        <p className="text-xs text-dashboard-textSecondary">{t('forecast.estimatedCost')}</p>
                         <p className="text-xl font-bold text-dashboard-text">{forecast.predictedCost}</p>
                     </div>
                     <div>
-                        <p className="text-xs text-dashboard-textSecondary">Range</p>
+                        <p className="text-xs text-dashboard-textSecondary">{t('forecast.range')}</p>
                         <p className="text-sm text-dashboard-text">
                             {consumption.range.min} - {consumption.range.max} kWh
                         </p>
@@ -126,33 +128,34 @@ const NextDayCard = ({ forecast, loading }) => {
             {/* Additional Info */}
             <div className="grid grid-cols-2 gap-4 mb-4">
                 <div className="bg-dashboard-textSecondary/10 rounded-lg p-3">
-                    <p className="text-xs text-dashboard-textSecondary">Day Type</p>
+                    <p className="text-xs text-dashboard-textSecondary">{t('forecast.dayType')}</p>
                     <p className="text-sm text-dashboard-text">{forecast.dayType}</p>
                 </div>
                 <div className="bg-dashboard-textSecondary/10 rounded-lg p-3">
-                    <p className="text-xs text-dashboard-textSecondary">Peak Usage</p>
+                    <p className="text-xs text-dashboard-textSecondary">{t('forecast.peakUsage')}</p>
                     <p className="text-sm text-dashboard-text">{forecast.peakUsageTime}</p>
                 </div>
             </div>
 
             {/* Recommendation */}
-            <div className="bg-green-500/10 rounded-xl p-3">
-                <p className="text-sm text-green-300 flex items-start gap-2">
+            <div className="bg-dashboard-textSecondary/10 rounded-xl p-3">
+                <p className="text-sm text-dashboard-text flex items-start gap-2">
                     <LightBulbIcon className="w-4 h-4 mt-0.5 flex-shrink-0" />
                     {forecast.recommendation}
                 </p>
             </div>
-        </div>
+        </div >
     );
 };
 
 // Weekly Forecast Chart
 const WeeklyForecastChart = ({ forecast, loading }) => {
+    const { t } = useTranslation();
     if (loading || !forecast?.forecasts) {
         return (
             <div className="bg-dashboard-card rounded-2xl p-6 border border-dashboard-textSecondary/20">
                 <div className="h-64 flex items-center justify-center">
-                    <ArrowPathIcon className="w-8 h-8 text-accent animate-spin" />
+                    <ArrowPathIcon className="w-8 h-8 text-dashboard-text animate-spin" />
                 </div>
             </div>
         );
@@ -170,15 +173,15 @@ const WeeklyForecastChart = ({ forecast, loading }) => {
         <div className="bg-dashboard-card rounded-2xl p-6 border border-dashboard-textSecondary/20">
             <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-bold text-dashboard-text flex items-center gap-2">
-                    <ChartBarIcon className="w-5 h-5 text-accent" />
-                    7-Day Forecast
+                    <ChartBarIcon className="w-5 h-5 text-dashboard-text" />
+                    {t('forecast.sevenDayForecast')}
                 </h3>
                 <div className="flex items-center gap-4 text-sm">
                     <span className="flex items-center gap-1 text-dashboard-textSecondary">
-                        <span className="w-3 h-3 rounded-full bg-blue-500"></span> Normal
+                        <span className="w-3 h-3 rounded-full bg-dashboard-textSecondary/50"></span> {t('forecast.normal')}
                     </span>
                     <span className="flex items-center gap-1 text-dashboard-textSecondary">
-                        <span className="w-3 h-3 rounded-full bg-red-500"></span> High
+                        <span className="w-3 h-3 rounded-full bg-dashboard-text"></span> {t('forecast.high')}
                     </span>
                 </div>
             </div>
@@ -188,8 +191,8 @@ const WeeklyForecastChart = ({ forecast, loading }) => {
                     <AreaChart data={chartData}>
                         <defs>
                             <linearGradient id="forecastGradient" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3} />
-                                <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+                                <stop offset="5%" stopColor="#ffffff" stopOpacity={0.3} />
+                                <stop offset="95%" stopColor="#ffffff" stopOpacity={0} />
                             </linearGradient>
                         </defs>
                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -205,14 +208,14 @@ const WeeklyForecastChart = ({ forecast, loading }) => {
                         <Tooltip content={<CustomTooltip />} />
                         <ReferenceLine
                             y={average}
-                            stroke="#f97316"
+                            stroke="#ffffff"
                             strokeDasharray="5 5"
-                            label={{ value: 'Avg', fill: '#f97316', fontSize: 10 }}
+                            label={{ value: 'Avg', fill: '#ffffff', fontSize: 10 }}
                         />
                         <Area
                             type="monotone"
                             dataKey="predicted"
-                            stroke="#3b82f6"
+                            stroke="#ffffff"
                             strokeWidth={2}
                             fill="url(#forecastGradient)"
                         />
@@ -225,10 +228,10 @@ const WeeklyForecastChart = ({ forecast, loading }) => {
                 {chartData.map((day, idx) => (
                     <div
                         key={idx}
-                        className={`rounded-lg p-2 text-center ${day.isHigh ? 'bg-red-500/20' :
-                                day.isLow ? 'bg-green-500/20' :
-                                    day.isWeekend ? 'bg-purple-500/20' :
-                                        'bg-dashboard-textSecondary/10'
+                        className={`rounded-lg p-2 text-center ${day.isHigh ? 'bg-dashboard-textSecondary/20' :
+                            day.isLow ? 'bg-dashboard-textSecondary/10' :
+                                day.isWeekend ? 'bg-dashboard-textSecondary/30' :
+                                    'bg-dashboard-textSecondary/5'
                             }`}
                     >
                         <p className="text-xs text-dashboard-textSecondary">{day.name}</p>
@@ -246,8 +249,8 @@ const WeeklyForecastChart = ({ forecast, loading }) => {
                     {forecast.alerts.map((alert, idx) => (
                         <div
                             key={idx}
-                            className={`flex items-start gap-2 rounded-lg p-3 text-sm ${alert.includes('⚠️') ? 'bg-yellow-500/10 text-yellow-300' :
-                                    'bg-green-500/10 text-green-300'
+                            className={`flex items-start gap-2 rounded-lg p-3 text-sm ${alert.includes('⚠️') ? 'bg-dashboard-textSecondary/20 text-dashboard-text' :
+                                'bg-dashboard-textSecondary/10 text-dashboard-textSecondary'
                                 }`}
                         >
                             {alert}
@@ -261,11 +264,12 @@ const WeeklyForecastChart = ({ forecast, loading }) => {
 
 // Monthly Projection Card
 const MonthlyProjection = ({ forecast, loading }) => {
+    const { t } = useTranslation();
     if (loading) {
         return (
             <div className="bg-dashboard-card rounded-2xl p-6 border border-dashboard-textSecondary/20 animate-pulse">
                 <div className="h-40 flex items-center justify-center">
-                    <ArrowPathIcon className="w-8 h-8 text-accent animate-spin" />
+                    <ArrowPathIcon className="w-8 h-8 text-dashboard-text animate-spin" />
                 </div>
             </div>
         );
@@ -281,28 +285,28 @@ const MonthlyProjection = ({ forecast, loading }) => {
         <div className="bg-dashboard-card rounded-2xl p-6 border border-dashboard-textSecondary/20">
             <h3 className="text-lg font-bold text-dashboard-text mb-4 flex items-center gap-2">
                 <CalendarDaysIcon className="w-5 h-5 text-accent" />
-                Monthly Projection
+                {t('forecast.monthlyProjection')}
             </h3>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                 <div className="bg-dashboard-textSecondary/10 rounded-xl p-4">
-                    <p className="text-xs text-dashboard-textSecondary">So Far</p>
+                    <p className="text-xs text-dashboard-textSecondary">{t('forecast.soFar')}</p>
                     <p className="text-xl font-bold text-dashboard-text">{forecast.currentMonthActual} kWh</p>
-                    <p className="text-xs text-dashboard-textSecondary">{forecast.daysElapsed} days</p>
+                    <p className="text-xs text-dashboard-textSecondary">{forecast.daysElapsed} {t('common.days')}</p>
                 </div>
                 <div className="bg-dashboard-textSecondary/10 rounded-xl p-4">
-                    <p className="text-xs text-dashboard-textSecondary">Forecasted</p>
+                    <p className="text-xs text-dashboard-textSecondary">{t('forecast.forecasted')}</p>
                     <p className="text-xl font-bold text-dashboard-text">{forecast.forecastedRemaining || '...'} kWh</p>
-                    <p className="text-xs text-dashboard-textSecondary">{forecast.daysRemaining} days left</p>
+                    <p className="text-xs text-dashboard-textSecondary">{forecast.daysRemaining} {t('forecast.daysLeft')}</p>
                 </div>
-                <div className="bg-accent/20 rounded-xl p-4">
-                    <p className="text-xs text-dashboard-textSecondary">Projected Total</p>
-                    <p className="text-xl font-bold text-accent">{forecast.predictedTotal} kWh</p>
-                    <p className="text-xs text-accent">{forecast.predictedCost}</p>
+                <div className="bg-dashboard-textSecondary/5 rounded-xl p-4">
+                    <p className="text-xs text-dashboard-textSecondary">{t('forecast.projectedTotal')}</p>
+                    <p className="text-xl font-bold text-dashboard-text">{forecast.predictedTotal} kWh</p>
+                    <p className="text-xs text-dashboard-textSecondary">{forecast.predictedCost}</p>
                 </div>
-                <div className={`rounded-xl p-4 ${isOverSubsidy ? 'bg-red-500/20' : 'bg-green-500/20'}`}>
-                    <p className="text-xs text-dashboard-textSecondary">vs Last Month</p>
-                    <p className={`text-xl font-bold ${forecast.comparison?.vsLastMonth?.startsWith('+') ? 'text-red-400' : 'text-green-400'
+                <div className={`rounded-xl p-4 ${isOverSubsidy ? 'bg-dashboard-textSecondary/20' : 'bg-dashboard-textSecondary/10'}`}>
+                    <p className="text-xs text-dashboard-textSecondary">{t('forecast.vsLastMonth')}</p>
+                    <p className={`text-xl font-bold ${forecast.comparison?.vsLastMonth?.startsWith('+') ? 'text-dashboard-text' : 'text-dashboard-textSecondary'
                         }`}>
                         {forecast.comparison?.vsLastMonth || 'N/A'}
                     </p>
@@ -311,26 +315,26 @@ const MonthlyProjection = ({ forecast, loading }) => {
 
             {/* Subsidy Tracking */}
             {forecast.subsidy && (
-                <div className={`rounded-xl p-4 mb-4 ${isOverSubsidy ? 'bg-red-500/10' : 'bg-green-500/10'}`}>
+                <div className={`rounded-xl p-4 mb-4 ${isOverSubsidy ? 'bg-dashboard-textSecondary/20' : 'bg-dashboard-textSecondary/10'}`}>
                     <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm text-dashboard-textSecondary">Subsidy Tracking</span>
-                        <span className={`text-sm font-bold ${isOverSubsidy ? 'text-red-400' : 'text-green-400'}`}>
+                        <span className="text-sm text-dashboard-textSecondary">{t('forecast.subsidyTracking')}</span>
+                        <span className={`text-sm font-bold ${isOverSubsidy ? 'text-dashboard-text' : 'text-dashboard-textSecondary'}`}>
                             {isOverSubsidy ? (
                                 <span className="flex items-center gap-1">
                                     <ExclamationTriangleIcon className="w-4 h-4" />
-                                    Over by {forecast.subsidy.excessUnits} units
+                                    {t('forecast.overBy')} {forecast.subsidy.excessUnits} {t('common.units')}
                                 </span>
                             ) : (
                                 <span className="flex items-center gap-1">
                                     <CheckCircleIcon className="w-4 h-4" />
-                                    Within limit
+                                    {t('forecast.withinLimit')}
                                 </span>
                             )}
                         </span>
                     </div>
                     <div className="w-full bg-dashboard-textSecondary/20 rounded-full h-3">
                         <div
-                            className={`h-3 rounded-full transition-all duration-500 ${isOverSubsidy ? 'bg-red-500' : 'bg-green-500'
+                            className={`h-3 rounded-full transition-all duration-500 ${isOverSubsidy ? 'bg-dashboard-text' : 'bg-dashboard-textSecondary'
                                 }`}
                             style={{
                                 width: `${Math.min(100, (forecast.predictedTotal / forecast.subsidy.freeUnits) * 100)}%`
@@ -339,12 +343,12 @@ const MonthlyProjection = ({ forecast, loading }) => {
                     </div>
                     <div className="flex justify-between text-xs text-dashboard-textSecondary mt-1">
                         <span>0</span>
-                        <span>Free: {forecast.subsidy.freeUnits} units</span>
-                        <span>Projected: {forecast.predictedTotal}</span>
+                        <span>{t('forecast.free')}: {forecast.subsidy.freeUnits} {t('common.units')}</span>
+                        <span>{t('forecast.projected')}: {forecast.predictedTotal}</span>
                     </div>
                     {isOverSubsidy && (
-                        <p className="text-sm text-red-400 mt-2">
-                            Extra cost: {forecast.subsidy.excessCost}
+                        <p className="text-sm text-dashboard-text mt-2">
+                            {t('forecast.extraCost')}: {forecast.subsidy.excessCost}
                         </p>
                     )}
                 </div>
@@ -365,6 +369,7 @@ const MonthlyProjection = ({ forecast, loading }) => {
 
 // What-If Calculator
 const WhatIfCalculator = ({ userId }) => {
+    const { t } = useTranslation();
     const [acReduction, setAcReduction] = useState(0);
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -386,12 +391,12 @@ const WhatIfCalculator = ({ userId }) => {
         <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-2xl p-6 border border-dashboard-textSecondary/20">
             <h3 className="text-lg font-bold text-dashboard-text mb-4 flex items-center gap-2">
                 <AdjustmentsHorizontalIcon className="w-5 h-5 text-accent" />
-                What-If Calculator
+                {t('forecast.whatIfCalculator')}
             </h3>
 
             <div className="mb-4">
                 <label className="text-sm text-dashboard-textSecondary block mb-2">
-                    What if I reduce AC usage by {acReduction}%?
+                    {t('forecast.whatIfReduceAC', { percent: acReduction })}
                 </label>
                 <input
                     type="range"
@@ -420,23 +425,23 @@ const WhatIfCalculator = ({ userId }) => {
                 {loading ? (
                     <ArrowPathIcon className="w-5 h-5 animate-spin" />
                 ) : (
-                    <>Calculate Savings</>
+                    <>{t('forecast.calculateSavings')}</>
                 )}
             </button>
 
             {result?.status === 'ready' && (
-                <div className="mt-4 p-4 bg-green-500/10 rounded-xl">
+                <div className="mt-4 p-4 bg-dashboard-textSecondary/10 rounded-xl">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <p className="text-xs text-dashboard-textSecondary">Weekly Savings</p>
-                            <p className="text-lg font-bold text-green-400">{result.summary.costSaved}</p>
+                            <p className="text-xs text-dashboard-textSecondary">{t('forecast.weeklyForecast')}</p>
+                            <p className="text-lg font-bold text-dashboard-text">{result.summary.costSaved}</p>
                             <p className="text-xs text-dashboard-textSecondary">
-                                {result.summary.unitsSaved} units saved
+                                {result.summary.unitsSaved} {t('common.units')}
                             </p>
                         </div>
                         <div>
-                            <p className="text-xs text-dashboard-textSecondary">Monthly Savings</p>
-                            <p className="text-lg font-bold text-green-400">{result.summary.monthlySavings}</p>
+                            <p className="text-xs text-dashboard-textSecondary">{t('costOptimizer.monthlySavings')}</p>
+                            <p className="text-lg font-bold text-dashboard-text">{result.summary.monthlySavings}</p>
                         </div>
                     </div>
                 </div>
@@ -447,6 +452,7 @@ const WhatIfCalculator = ({ userId }) => {
 
 // Main EnergyForecast Component
 const EnergyForecast = ({ userId = 'user123' }) => {
+    const { t } = useTranslation();
     const [nextDayForecast, setNextDayForecast] = useState(null);
     const [weekForecast, setWeekForecast] = useState(null);
     const [monthForecast, setMonthForecast] = useState(null);
@@ -478,8 +484,8 @@ const EnergyForecast = ({ userId = 'user123' }) => {
             {/* Header with Refresh */}
             <div className="flex items-center justify-between">
                 <h2 className="text-xl font-bold text-dashboard-text flex items-center gap-2">
-                    <ArrowTrendingUpIcon className="w-6 h-6 text-accent" />
-                    Energy Forecast
+                    <ArrowTrendingUpIcon className="w-6 h-6 text-dashboard-text" />
+                    {t('forecast.title')}
                 </h2>
                 <button
                     onClick={fetchForecasts}
@@ -487,7 +493,7 @@ const EnergyForecast = ({ userId = 'user123' }) => {
                     className="flex items-center gap-2 px-4 py-2 bg-dashboard-textSecondary/20 hover:bg-dashboard-textSecondary/30 rounded-xl transition-colors text-dashboard-text text-sm"
                 >
                     <ArrowPathIcon className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-                    Refresh
+                    {t('forecast.refresh')}
                 </button>
             </div>
 

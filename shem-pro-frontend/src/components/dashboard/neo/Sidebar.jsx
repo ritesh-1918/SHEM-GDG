@@ -15,8 +15,12 @@ const Sidebar = ({ activeTab = 'dashboard', setActiveTab }) => {
     return (
         <div className="w-20 h-screen bg-dashboard-bg fixed left-0 top-0 flex flex-col items-center py-6 border-r border-dashboard-textSecondary/20 z-50">
             {/* Logo */}
-            <div className="mb-10 text-accent">
-                <BoltIcon className="h-8 w-8" />
+            <div className="mb-10">
+                <img
+                    src="/favicon.png"
+                    alt="SHEM Logo"
+                    className="h-10 w-10 object-contain rounded-lg"
+                />
             </div>
 
             {/* Nav Items */}

@@ -10,7 +10,14 @@
         "offPeakHours": "ഓഫ്-പീക്ക് മണിക്കൂറുകൾ",
         "savingsToday": "ഇന്നത്തെ ലാഭം",
         "powerFactor": "പവർ ഫാക്ടർ",
-        "liveConsumption": "ലൈവ് ഉപഭോഗം"
+        "liveConsumption": "ലൈവ് ഉപഭോഗം",
+        "quickControls": "ദ്രുത നിയന്ത്രണങ്ങൾ",
+        "active": "സജീവം",
+        "realtimePowerMonitor": "തത്സമയ പവർ മോണിറ്റർ",
+        "liveView": "ലൈവ് കാഴ്‌ച",
+        "predictionAccuracy": "പ്രവചന കൃത്യത",
+        "liveDraw": "ലൈവ് ഡ്രോ",
+        "peakPrediction": "പീക്ക് പ്രവചനം"
     },
     "analytics": {
         "title": "അനലിറ്റിക്സ്",
@@ -19,13 +26,34 @@
         "current": "കറന്റ്",
         "power": "പവർ",
         "frequency": "ഫ്രീക്വൻസി",
+        "energy": "ഊർജ്ജം",
+        "cost": "ചെലവ്",
+        "pf": "പിഎഫ്",
         "anomalies": "അസാധാരണത്വങ്ങൾ",
         "detected": "കണ്ടെത്തി",
         "resolved": "പരിഹരിച്ചു",
         "trends": "ട്രെൻഡുകൾ",
         "weeklyExpenditure": "ആഴ്ചത്തെ ചെലവ്",
         "viewReport": "റിപ്പോർട്ട് കാണുക",
-        "totalThisWeek": "ഈ ആഴ്ച ആകെ"
+        "totalThisWeek": "ഈ ആഴ്ച ആകെ",
+        "vsLastWeek": "കഴിഞ്ഞ ആഴ്ചയുമായി താരതമ്യം ചെയ്യുമ്പോൾ",
+        "detectedIssues": "കണ്ടെത്തിയ പ്രശ്നങ്ങൾ (കഴിഞ്ഞ 7 ദിവസങ്ങൾ)",
+        "anomaliesDetected": "അസാധാരണത്വങ്ങൾ കണ്ടെത്തി",
+        "noAnomaliesDetected": "അസാധാരണത്വങ്ങളൊന്നും കണ്ടെത്തിയില്ല",
+        "anomaliesOverTime": "കാലക്രമേണയുള്ള അസാധാരണത്വങ്ങൾ",
+        "anomalyRateStable": "അസാധാരണ നിരക്ക് സ്ഥിരമാണ്",
+        "aiRecommendations": "AI ശുപാർശകൾ",
+        "noSpecificConcerns": "പ്രത്യേക ആശങ്കകളൊന്നുമില്ല. നിങ്ങളുടെ ഉപഭോഗ പാറ്റേണുകൾ ആരോഗ്യകരമായി കാണപ്പെടുന്നു!",
+        "scheduleHealthCheck": "അപ്ലയൻസ് ഹെൽത്ത് ചെക്ക് ഷെഡ്യൂൾ ചെയ്യുക",
+        "comingSoon": "ഉടൻ വരുന്നു",
+        "energyBreakdown": "ഊർജ്ജ വിഭജനം",
+        "simulatedDistribution": "സിമുലേറ്റഡ് വിതരണം",
+        "total": "ആകെ",
+        "lighting": "ലൈറ്റിംഗ്",
+        "acHvac": "AC / HVAC",
+        "appliances": "ഉപകരണങ്ങൾ",
+        "others": "മറ്റുള്ളവ",
+        "costAnalytics": "ചെലവ് അനലിറ്റിക്സ്"
     },
     "control": {
         "title": "നിയന്ത്രണം",
@@ -35,7 +63,11 @@
         "on": "ഓൺ",
         "off": "ഓഫ്",
         "schedule": "ഷെഡ്യൂൾ",
-        "automation": "ഓട്ടോമേഷൻ"
+        "automation": "ഓട്ടോമേഷൻ",
+        "livingRoomLights": "ലിവിംഗ് റൂം ലൈറ്റുകൾ",
+        "acMasterBedroom": "AC മാസ്റ്റർ ബെഡ്റൂം",
+        "smartTV": "സ്മാർട്ട് TV",
+        "workstation": "വർക്ക്സ്റ്റേഷൻ"
     },
     "settings": {
         "title": "ക്രമീകരണങ്ങൾ",
@@ -50,7 +82,10 @@
         "lightMode": "ലൈറ്റ് മോഡ്"
     },
     "chat": {
+        "greeting": "ഹായ്! ഞാൻ SHEM",
+        "greetingSubtext": "നിങ്ങളുടെ AI ഊർജ്ജ ഉപദേഷ്ടാവ്. നിങ്ങളുടെ വൈദ്യുതി ഉപയോഗത്തെക്കുറിച്ച് എന്തും ചോദിക്കുക!",
         "askShem": "SHEM-നോട് ചോദിക്കുക",
+        "energyAdvisor": "SHEM - ഊർജ്ജ ഉപദേഷ്ടാവ്",
         "placeholder": "നിങ്ങളുടെ ഊർജ്ജ ഉപയോഗത്തെക്കുറിച്ച് ചോദിക്കുക...",
         "thinking": "SHEM ചിന്തിക്കുന്നു...",
         "rateLimited": "റേറ്റ് പരിമിതം. ഒരു മണിക്കൂർ കഴിഞ്ഞ് വീണ്ടും ശ്രമിക്കുക.",
@@ -58,27 +93,80 @@
         "retry": "വീണ്ടും ശ്രമിക്കുക",
         "settings": "ചാറ്റ് ക്രമീകരണങ്ങൾ",
         "clearHistory": "ചരിത്രം മായ്ക്കുക",
-        "privacyNote": "നിങ്ങളുടെ ചാറ്റ് സുരക്ഷിതമായി പ്രോ��സ്സ് ചെയ്യപ്പെടുന്നു.",
+        "privacyNote": "നിങ്ങളുടെ ചാറ്റ് സുരക്ഷിതമായി പ്രോസസ്സ് ചെയ്യപ്പെടുന്നു. ഞങ്ങൾ വ്യക്തിഗത ഡാറ്റ സംഭരിക്കുന്നില്ല.",
         "tellMeMore": "കൂടുതൽ പറയുക",
         "howToDoThis": "ഇത് എങ്ങനെ ചെയ്യും?",
-        "whatElse": "മറ്റെന്ത്?"
+        "whatElse": "മറ്റെന്ത്?",
+        "consumptionTrend": "എന്റെ ഉപഭോഗ പ്രവണത എന്താണ്?",
+        "whichHourCostsMost": "ഏത് മണിക്കൂറാണ് എനിക്ക് കൂടുതൽ ചിലവ് വരുന്നത്?",
+        "anyAnomalies": "എന്തെങ്കിലും അസാധാരണത്വങ്ങൾ ഉണ്ടോ?",
+        "whyBillHigh": "എന്റെ ബിൽ എന്തുകൊണ്ട് കൂടുതലാണ്?",
+        "scheduleAC": "എന്റെ AC എങ്ങനെ ഷെഡ്യൂൾ ചെയ്യാം?",
+        "bestTimeWashingMachine": "വാഷിംഗ് മെഷീൻ പ്രവർത്തിപ്പിക്കാൻ ഏറ്റവും അനുയോജ്യമായ സമയം?",
+        "optimizeDeviceUsage": "എന്റെ ഉപകരണ ഉപയോഗം ഒപ്റ്റിമൈസ് ചെയ്യുക"
     },
     "forecast": {
         "title": "ഊർജ്ജ പ്രവചനം",
+        "refresh": "റിഫ്രഷ് ചെയ്യുക",
+        "collectingData": "കൃത്യമായ പ്രവചനങ്ങൾക്കായി ഡാറ്റ ശേഖരിക്കുന്നു...",
+        "needMoreDays": "{{days}} ദിവസത്തെ ഡാറ്റ കൂടി ആവശ്യമാണ്",
         "tomorrow": "നാളത്തെ പ്രവചനം",
         "weeklyForecast": "ആഴ്ചത്തെ പ്രവചനം",
         "monthlyProjection": "മാസ പ്രൊജക്ഷൻ",
+        "soFar": "ഇതുവരെ",
+        "forecasted": "പ്രവചിച്ചത്",
+        "daysLeft": "ദിവസങ്ങൾ ശേഷിക്കുന്നു",
+        "projectedTotal": "പ്രൊജക്റ്റ് ചെയ്ത ആകെത്തുക",
+        "vsLastMonth": "കഴിഞ്ഞ മാസവുമായി താരതമ്യം ചെയ്യുമ്പോൾ",
         "predictedUsage": "പ്രവചിത ഉപയോഗം",
         "estimatedCost": "കണക്കാക്കിയ ചെലവ്",
-        "confidence": "ആത്മവിശ്വാസം"
+        "confidence": "ആത്മവിശ്വാസം",
+        "whatIfCalculator": "എങ്കിൽ എന്ത് കാൽക്കുലേറ്റർ",
+        "whatIfReduceAC": "ഞാൻ AC ഉപയോഗം {{percent}}% കുറച്ചാൽ എന്ത് സംഭവിക്കും?",
+        "calculateSavings": "ലാഭം കണക്കാക്കുക"
     },
     "appliances": {
-        "title": "ഉപകരണങ്ങൾ",
+        "title": "ഉപകരണ വിഭജനം",
         "breakdown": "കണക്കാക്കിയ ഉപകരണ വിഭജനം",
+        "learningPatterns": "നിങ്ങളുടെ പാറ്റേണുകൾ പഠിക്കുന്നു",
+        "needMoreData": "നിങ്ങളുടെ ഉപകരണങ്ങളെ കൃത്യമായി തിരിച്ചറിയാൻ ഞങ്ങൾക്ക് ഏകദേശം {{days}} ദിവസത്തെ ഡാറ്റ കൂടി ആവശ്യമാണ്.",
+        "dataPointsCollected": "{{current}} / {{total}} ഡാറ്റ പോയിന്റുകൾ ശേഖരിച്ചു",
         "detected": "കണ്ടെത്തിയ ഉപകരണങ്ങൾ",
         "unidentified": "തിരിച്ചറിയാത്ത ഉപഭോഗം",
         "addManually": "മാനുവലായി ഉപകരണം ചേർക്കുക",
         "waysToSave": "പണം ലാഭിക്കാനുള്ള വഴികൾ"
+    },
+    "peakHours": {
+        "smartTariffSavings": "സ്മാർട്ട് താരിഫ് സേവിംഗ്സ്",
+        "offPeakHours": "ഓഫ്-പീക്ക് മണിക്കൂറുകൾ",
+        "untilPeakHours": "പീക്ക് മണിക്കൂറുകൾ വരെ",
+        "currentPower": "നിലവിലെ പവർ",
+        "hourlyCost": "മണിക്കൂർ നിരക്ക്",
+        "shiftToOffPeak": "ഓഫ്-പീക്കിലേക്ക് മാറുക & ലാഭിക്കുക",
+        "runAtNight": "രാത്രി 11 - രാവിലെ 6 വരെ പ്രവർത്തിപ്പിക്കുക",
+        "useAfterMidnight": "അർദ്ധരാത്രിക്ക് ശേഷം ഉപയോഗിക്കുക",
+        "scheduleEarly": "രാവിലെ 1-2 മണിക്ക് ഷെഡ്യൂൾ ചെയ്യുക",
+        "chargeOvernight": "രാത്രി മുഴുവൻ ചാർജ് ചെയ്യുക",
+        "hourForecast": "24-മണിക്കൂർ പ്രവചനം",
+        "viewSchedule": "ഷെഡ്യൂൾ കാണുക",
+        "nextOffPeak": "അടുത്ത ഓഫ്-പീക്ക്"
+    },
+    "costOptimizer": {
+        "title": "ചെലവ് ഒപ്റ്റിമൈസർ",
+        "subtitle": "നിങ്ങളുടെ സേവിംഗ്സ് സാധ്യത വർദ്ധിപ്പിക്കുക",
+        "yourCurrentCosts": "നിങ്ങളുടെ നിലവിലെ ചെലവുകൾ",
+        "whatIfScenarios": "എങ്കിൽ എന്ത് സാഹചര്യങ്ങൾ",
+        "actionPlan": "കർമ്മ പദ്ധതി",
+        "totalConsumption": "ആകെ ഉപഭോഗം",
+        "totalCost": "ആകെ ചെലവ്",
+        "costBreakdown": "ചെലവ് വിഭജനം",
+        "peakVsOffPeak": "പീക്ക് vs ഓഫ്-പീക്ക് വിഷ്വലൈസേഷൻ",
+        "enableSmartScheduling": "സ്മാർട്ട് ഷെഡ്യൂളിംഗ് പ്രവർത്തനക്ഷമമാക്കുക",
+        "printPlan": "പ്ലാൻ പ്രിന്റ് ചെയ്യുക"
+    },
+    "aiInsight": {
+        "title": "AI ഇൻസൈറ്റ്",
+        "analyzing": "നിങ്ങളുടെ ഊർജ്ജ പാറ്റേണുകൾ വിശകലനം ചെയ്യുന്നു..."
     },
     "common": {
         "loading": "ലോഡ് ചെയ്യുന്നു...",
@@ -90,7 +178,17 @@
         "edit": "എഡിറ്റ് ചെയ്യുക",
         "refresh": "റിഫ്രഷ് ചെയ്യുക",
         "viewAll": "എല്ലാം കാണുക",
-        "moreLanguages": "കൂടുതൽ ഭാഷകൾ..."
+        "moreLanguages": "കൂടുതൽ ഭാഷകൾ...",
+        "units": "യൂണിറ്റുകൾ",
+        "days": "ദിവസങ്ങൾ",
+        "hours": "മണിക്കൂറുകൾ",
+        "minutes": "മിനിറ്റുകൾ",
+        "now": "ഇപ്പോൾ",
+        "ac": "AC",
+        "waterHeater": "വാട്ടർ ഹീറ്റർ",
+        "washingMachine": "വാഷിംഗ് മെഷീൻ",
+        "evCharging": "EV ചാർജിംഗ്",
+        "perDay": "/ദിവസം"
     },
     "units": {
         "watts": "W",
@@ -99,6 +197,7 @@
         "volts": "V",
         "amperes": "A",
         "rupees": "₹",
-        "percentage": "%"
+        "percentage": "%",
+        "hz": "Hz"
     }
 }

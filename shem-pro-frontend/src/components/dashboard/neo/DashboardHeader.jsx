@@ -95,7 +95,7 @@ const DashboardHeader = ({ title, onProfileClick }) => {
                         className="focus:outline-none transition-transform hover:scale-105"
                     >
                         <img
-                            src={user?.profileImage || "/placeholder.svg"}
+                            src={user?.profileImage || "/profile.png"}
                             alt="Profile"
                             className="w-9 h-9 rounded-full border border-dashboard-textSecondary/30 hover:border-accent transition-colors"
                         />

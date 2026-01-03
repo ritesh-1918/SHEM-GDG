@@ -1,5 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { PaperAirplaneIcon, XMarkIcon, ChatBubbleLeftRightIcon, SparklesIcon } from '@heroicons/react/24/solid';
+import {
+    ChatBubbleLeftRightIcon,
+    XMarkIcon,
+    PaperAirplaneIcon,
+    Cog6ToothIcon,
+    ArrowPathIcon,
+    MicrophoneIcon,
+    StopIcon,
+    SpeakerWaveIcon
+} from '@heroicons/react/24/solid';
 import { generateAIResponse } from '../../../services/aiLLM';
 
 const ShemChat = ({ contextData }) => {
@@ -51,7 +60,7 @@ const ShemChat = ({ contextData }) => {
                 <div className="fixed bottom-24 right-6 w-96 max-w-[calc(100vw-3rem)] h-[500px] bg-dashboard-card border border-dashboard-textSecondary/10 rounded-2xl shadow-2xl flex flex-col z-50 overflow-hidden fade-in-up">
                     {/* Header */}
                     <div className="bg-dashboard-bg p-4 border-b border-dashboard-textSecondary/10 flex items-center gap-2">
-                        <SparklesIcon className="h-5 w-5 text-accent" />
+                        <img src="/chatbot.jpeg" alt="SHEM" className="w-6 h-6 rounded-full object-contain bg-white p-0.5" />
                         <h3 className="font-bold text-dashboard-text">SHEM Assistant</h3>
                     </div>
 

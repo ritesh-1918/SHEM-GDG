@@ -10,7 +10,14 @@
         "offPeakHours": "ஆஃப்-பீக் மணிநேரம்",
         "savingsToday": "இன்றைய சேமிப்பு",
         "powerFactor": "பவர் ஃபேக்டர்",
-        "liveConsumption": "நேரடி நுகர்வு"
+        "liveConsumption": "நேரடி நுகர்வு",
+        "quickControls": "விரைவு கட்டுப்பாடுகள்",
+        "active": "செயலில்",
+        "realtimePowerMonitor": "நேரடி மின் கண்காணிப்பு",
+        "liveView": "நேரடி காட்சி",
+        "predictionAccuracy": "கணிப்பு துல்லியம்",
+        "liveDraw": "நேரடி வரைவு",
+        "peakPrediction": "பீக் கணிப்பு"
     },
     "analytics": {
         "title": "பகுப்பாய்வு",
@@ -19,13 +26,34 @@
         "current": "மின்னோட்டம்",
         "power": "சக்தி",
         "frequency": "அதிர்வெண்",
+        "energy": "ஆற்றல்",
+        "cost": "செலவு",
+        "pf": "பிஎஃப்",
         "anomalies": "முரண்பாடுகள்",
         "detected": "கண்டறியப்பட்டது",
         "resolved": "தீர்க்கப்பட்டது",
         "trends": "போக்குகள்",
         "weeklyExpenditure": "வாராந்திர செலவு",
         "viewReport": "அறிக்கை பார்",
-        "totalThisWeek": "இந்த வாரம் மொத்தம்"
+        "totalThisWeek": "இந்த வாரம் மொத்தம்",
+        "vsLastWeek": "கடந்த வாரத்துடன் ஒப்பிடுகையில்",
+        "detectedIssues": "கண்டறியப்பட்ட சிக்கல்கள் (கடந்த 7 நாட்கள்)",
+        "anomaliesDetected": "முரண்பாடுகள் கண்டறியப்பட்டன",
+        "noAnomaliesDetected": "முரண்பாடுகள் கண்டறியப்படவில்லை",
+        "anomaliesOverTime": "காலப்போக்கில் முரண்பாடுகள்",
+        "anomalyRateStable": "முரண்பாடு விகிதம் நிலையானது",
+        "aiRecommendations": "AI பரிந்துரைகள்",
+        "noSpecificConcerns": "குறிப்பிட்ட கவலைகள் இல்லை. உங்கள் நுகர்வு முறைகள் ஆரோக்கியமாக உள்ளன!",
+        "scheduleHealthCheck": "சாதன ஆரோக்கிய சோதனை திட்டமிடுக",
+        "comingSoon": "விரைவில் வருகிறது",
+        "energyBreakdown": "ஆற்றல் பிரிப்பு",
+        "simulatedDistribution": "உருவகப்படுத்தப்பட்ட விநியோகம்",
+        "total": "மொத்தம்",
+        "lighting": "விளக்குகள்",
+        "acHvac": "AC / HVAC",
+        "appliances": "சாதனங்கள்",
+        "others": "மற்றவை",
+        "costAnalytics": "செலவு பகுப்பாய்வு"
     },
     "control": {
         "title": "கட்டுப்பாடு",
@@ -35,7 +63,11 @@
         "on": "ஆன்",
         "off": "ஆஃப்",
         "schedule": "அட்டவணை",
-        "automation": "தானியங்கி"
+        "automation": "தானியங்கி",
+        "livingRoomLights": "வாழ்க்கை அறை விளக்குகள்",
+        "acMasterBedroom": "AC முதன்மை படுக்கையறை",
+        "smartTV": "ஸ்மார்ட் TV",
+        "workstation": "பணிநிலையம்"
     },
     "settings": {
         "title": "அமைப்புகள்",
@@ -50,7 +82,10 @@
         "lightMode": "லைட் மோட்"
     },
     "chat": {
+        "greeting": "வணக்கம்! நான் SHEM",
+        "greetingSubtext": "உங்கள் AI ஆற்றல் ஆலோசகர். உங்கள் மின்சார பயன்பாடு பற்றி எதையும் கேளுங்கள்!",
         "askShem": "SHEM-ஐ கேள்",
+        "energyAdvisor": "SHEM - ஆற்றல் ஆலோசகர்",
         "placeholder": "உங்கள் ஆற்றல் பயன்பாடு பற்றி கேளுங்கள்...",
         "thinking": "SHEM சிந்திக்கிறது...",
         "rateLimited": "வீத வரம்பு. ஒரு மணி நேரத்தில் மீண்டும் முயற்சிக்கவும்.",
@@ -58,27 +93,80 @@
         "retry": "மீண்டும் முயற்சி",
         "settings": "சாட் அமைப்புகள்",
         "clearHistory": "வரலாற்றை அழி",
-        "privacyNote": "உங்கள் சாட் பாதுகாப்பாக செயலாக்கப்படுகிறது.",
+        "privacyNote": "உங்கள் சாட் பாதுகாப்பாக செயலாக்கப்படுகிறது. நாங்கள் தனிப்பட்ட தரவைச் சேமிப்பதில்லை.",
         "tellMeMore": "மேலும் சொல்",
         "howToDoThis": "இது எப்படி செய்வது?",
-        "whatElse": "வேறு என்ன?"
+        "whatElse": "வேறு என்ன?",
+        "consumptionTrend": "என் நுகர்வு போக்கு என்ன?",
+        "whichHourCostsMost": "எந்த மணி நேரம் எனக்கு அதிக செலவாகிறது?",
+        "anyAnomalies": "ஏதாவது முரண்பாடுகள் உள்ளதா?",
+        "whyBillHigh": "என் பில் ஏன் அதிகம்?",
+        "scheduleAC": "என் AC-ஐ எவ்வாறு திட்டமிடுவது?",
+        "bestTimeWashingMachine": "துவைப்பு இயந்திரம் இயக்க சிறந்த நேரம்?",
+        "optimizeDeviceUsage": "என் சாதன பயன்பாட்டை மேம்படுத்துக"
     },
     "forecast": {
         "title": "ஆற்றல் முன்னறிவிப்பு",
+        "refresh": "புதுப்பி",
+        "collectingData": "துல்லியமான முன்னறிவிப்புகளுக்கு தரவு சேகரிக்கிறது...",
+        "needMoreDays": "{{days}} நாட்கள் மேலும் தரவு தேவை",
         "tomorrow": "நாளை முன்னறிவிப்பு",
         "weeklyForecast": "வாராந்திர முன்னறிவிப்பு",
         "monthlyProjection": "மாதாந்திர கணக்கீடு",
+        "soFar": "இதுவரை",
+        "forecasted": "முன்னறிவிக்கப்பட்டது",
+        "daysLeft": "நாட்கள் மீதம்",
+        "projectedTotal": "திட்டமிடப்பட்ட மொத்தம்",
+        "vsLastMonth": "கடந்த மாதத்துடன் ஒப்பிடுகையில்",
         "predictedUsage": "கணிக்கப்பட்ட பயன்பாடு",
         "estimatedCost": "மதிப்பிடப்பட்ட செலவு",
-        "confidence": "நம்பகத்தன்மை"
+        "confidence": "நம்பகத்தன்மை",
+        "whatIfCalculator": "என்றால்-என்ன கணிப்பான்",
+        "whatIfReduceAC": "நான் AC பயன்பாட்டை {{percent}}% குறைத்தால்?",
+        "calculateSavings": "சேமிப்பைக் கணக்கிடுக"
     },
     "appliances": {
-        "title": "சாதனங்கள்",
+        "title": "சாதன பிரிப்பு",
         "breakdown": "மதிப்பிடப்பட்ட சாதன பிரிப்பு",
+        "learningPatterns": "உங்கள் முறைகளை கற்றுக்கொள்கிறது",
+        "needMoreData": "உங்கள் சாதனங்களை துல்லியமாக அடையாளம் காண {{days}} நாட்கள் மேலும் தரவு தேவை.",
+        "dataPointsCollected": "{{current}} / {{total}} தரவு புள்ளிகள் சேகரிக்கப்பட்டன",
         "detected": "கண்டறியப்பட்ட சாதனங்கள்",
         "unidentified": "அடையாளம் காணப்படாத நுகர்வு",
         "addManually": "கைமுறையாக சாதனத்தைச் சேர்",
         "waysToSave": "பணம் சேமிக்கும் வழிகள்"
+    },
+    "peakHours": {
+        "smartTariffSavings": "ஸ்மார்ட் கட்டண சேமிப்பு",
+        "offPeakHours": "ஆஃப்-பீக் மணிநேரம்",
+        "untilPeakHours": "பீக் மணிநேரம் வரை",
+        "currentPower": "தற்போதைய சக்தி",
+        "hourlyCost": "மணிநேர செலவு",
+        "shiftToOffPeak": "ஆஃப்-பீக்கிற்கு மாறி சேமியுங்கள்",
+        "runAtNight": "இரவு 11 - காலை 6 மணி வரை இயக்குக",
+        "useAfterMidnight": "நள்ளிரவுக்குப் பிறகு பயன்படுத்துக",
+        "scheduleEarly": "காலை 1-2 மணிக்கு திட்டமிடுக",
+        "chargeOvernight": "இரவு முழுவதும் சார்ஜ் செய்க",
+        "hourForecast": "24-மணி நேர முன்னறிவிப்பு",
+        "viewSchedule": "அட்டவணை பார்",
+        "nextOffPeak": "அடுத்த ஆஃப்-பீக்"
+    },
+    "costOptimizer": {
+        "title": "செலவு மேம்படுத்தி",
+        "subtitle": "உங்கள் சேமிப்பு திறனை அதிகரிக்கவும்",
+        "yourCurrentCosts": "உங்கள் தற்போதைய செலவுகள்",
+        "whatIfScenarios": "என்றால்-என்ன சூழ்நிலைகள்",
+        "actionPlan": "செயல் திட்டம்",
+        "totalConsumption": "மொத்த நுகர்வு",
+        "totalCost": "மொத்த செலவு",
+        "costBreakdown": "செலவு பிரிப்பு",
+        "peakVsOffPeak": "பீக் vs ஆஃப்-பீக் காட்சிப்படுத்தல்",
+        "enableSmartScheduling": "ஸ்மார்ட் திட்டமிடலை இயக்குக",
+        "printPlan": "திட்டத்தை அச்சிடுக"
+    },
+    "aiInsight": {
+        "title": "AI நுண்ணறிவு",
+        "analyzing": "உங்கள் ஆற்றல் முறைகளை பகுப்பாய்வு செய்கிறது..."
     },
     "common": {
         "loading": "ஏற்றுகிறது...",
@@ -90,7 +178,17 @@
         "edit": "திருத்து",
         "refresh": "புதுப்பி",
         "viewAll": "அனைத்தையும் காண்",
-        "moreLanguages": "மேலும் மொழிகள்..."
+        "moreLanguages": "மேலும் மொழிகள்...",
+        "units": "யூனிட்கள்",
+        "days": "நாட்கள்",
+        "hours": "மணிநேரங்கள்",
+        "minutes": "நிமிடங்கள்",
+        "now": "இப்போது",
+        "ac": "AC",
+        "waterHeater": "வாட்டர் ஹீட்டர்",
+        "washingMachine": "துவைப்பு இயந்திரம்",
+        "evCharging": "EV சார்ஜிங்",
+        "perDay": "/நாள்"
     },
     "units": {
         "watts": "W",
@@ -99,6 +197,7 @@
         "volts": "V",
         "amperes": "A",
         "rupees": "₹",
-        "percentage": "%"
+        "percentage": "%",
+        "hz": "Hz"
     }
 }

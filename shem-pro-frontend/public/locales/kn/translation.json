@@ -10,7 +10,14 @@
         "offPeakHours": "ಆಫ್-ಪೀಕ್ ಗಂಟೆಗಳು",
         "savingsToday": "ಇಂದಿನ ಉಳಿತಾಯ",
         "powerFactor": "ಪವರ್ ಫ್ಯಾಕ್ಟರ್",
-        "liveConsumption": "ಲೈವ್ ಬಳಕೆ"
+        "liveConsumption": "ಲೈವ್ ಬಳಕೆ",
+        "quickControls": "ತ್ವರಿತ ನಿಯಂತ್ರಣಗಳು",
+        "active": "ಸಕ್ರಿಯ",
+        "realtimePowerMonitor": "ನೈಜ ಸಮಯ ಪವರ್ ಮಾನಿಟರ್",
+        "liveView": "ಲೈವ್ ವ್ಯೂ",
+        "predictionAccuracy": "ಮುನ್ಸೂಚನೆ ನಿಖರತೆ",
+        "liveDraw": "ಲೈವ್ ಡ್ರಾ",
+        "peakPrediction": "ಪೀಕ್ ಮುನ್ಸೂಚನೆ"
     },
     "analytics": {
         "title": "ವಿಶ್ಲೇಷಣೆ",
@@ -19,13 +26,34 @@
         "current": "ಕರೆಂಟ್",
         "power": "ಶಕ್ತಿ",
         "frequency": "ಆವರ್ತನ",
+        "energy": "ಶಕ್ತಿ",
+        "cost": "ವೆಚ್ಚ",
+        "pf": "ಪಿಎಫ್",
         "anomalies": "ಅಸಹಜತೆಗಳು",
         "detected": "ಪತ್ತೆಯಾಗಿದೆ",
         "resolved": "ಪರಿಹರಿಸಲಾಗಿದೆ",
         "trends": "ಪ್ರವೃತ್ತಿಗಳು",
         "weeklyExpenditure": "ವಾರದ ಖರ್ಚು",
         "viewReport": "ವರದಿ ನೋಡಿ",
-        "totalThisWeek": "ಈ ವಾರ ಒಟ್ಟು"
+        "totalThisWeek": "ಈ ವಾರ ಒಟ್ಟು",
+        "vsLastWeek": "ಕಳೆದ ವಾರದ ಹೋಲಿಕೆಯಲ್ಲಿ",
+        "detectedIssues": "ಪತ್ತೆಯಾದ ಸಮಸ್ಯೆಗಳು (ಕಳೆದ 7 ದಿನಗಳು)",
+        "anomaliesDetected": "ಅಸಹಜತೆಗಳು ಪತ್ತೆಯಾಗಿವೆ",
+        "noAnomaliesDetected": "ಯಾವುದೇ ಅಸಹಜತೆಗಳು ಪತ್ತೆಯಾಗಿಲ್ಲ",
+        "anomaliesOverTime": "ಕಾಲಾಂತರದಲ್ಲಿ ಅಸಹಜತೆಗಳು",
+        "anomalyRateStable": "ಅಸಹಜತೆ ದರ ಸ್ಥಿರವಾಗಿದೆ",
+        "aiRecommendations": "AI ಶಿಫಾರಸುಗಳು",
+        "noSpecificConcerns": "ನಿರ್ದಿಷ್ಟ ಕಾಳಜಿಗಳಿಲ್ಲ. ನಿಮ್ಮ ಬಳಕೆ ಮಾದರಿಗಳು ಆರೋಗ್ಯಕರವಾಗಿ ಕಾಣುತ್ತವೆ!",
+        "scheduleHealthCheck": "ಉಪಕರಣ ಆರೋಗ್ಯ ತಪಾಸಣೆ ನಿಗದಿಪಡಿಸಿ",
+        "comingSoon": "ಶೀಘ್ರದಲ್ಲೇ ಬರುತ್ತಿದೆ",
+        "energyBreakdown": "ಶಕ್ತಿ ವಿಭಜನೆ",
+        "simulatedDistribution": "ಸಿಮ್ಯುಲೇಟೆಡ್ ವಿತರಣೆ",
+        "total": "ಒಟ್ಟು",
+        "lighting": "ಬೆಳಕು",
+        "acHvac": "AC / HVAC",
+        "appliances": "ಉಪಕರಣಗಳು",
+        "others": "ಇತರರು",
+        "costAnalytics": "ವೆಚ್ಚ ವಿಶ್ಲೇಷಣೆ"
     },
     "control": {
         "title": "ನಿಯಂತ್ರಣ",
@@ -35,7 +63,11 @@
         "on": "ಆನ್",
         "off": "ಆಫ್",
         "schedule": "ವೇಳಾಪಟ್ಟಿ",
-        "automation": "ಆಟೋಮೇಷನ್"
+        "automation": "ಆಟೋಮೇಷನ್",
+        "livingRoomLights": "ಲಿವಿಂಗ್ ರೂಮ್ ಲೈಟ್ಸ್",
+        "acMasterBedroom": "AC ಮಾಸ್ಟರ್ ಬೆಡ್‌ರೂಮ್",
+        "smartTV": "ಸ್ಮಾರ್ಟ್ TV",
+        "workstation": "ವರ್ಕ್‌ಸ್ಟೇಷನ್"
     },
     "settings": {
         "title": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
@@ -50,7 +82,10 @@
         "lightMode": "ಲೈಟ್ ಮೋಡ್"
     },
     "chat": {
+        "greeting": "ಹಾಯ್! ನಾನು SHEM",
+        "greetingSubtext": "ನಿಮ್ಮ AI ಶಕ್ತಿ ಸಲಹೆಗಾರ. ನಿಮ್ಮ ವಿದ್ಯುತ್ ಬಳಕೆಯ ಬಗ್ಗೆ ಏನು ಬೇಕಾದರೂ ಕೇಳಿ!",
         "askShem": "SHEM ಅನ್ನು ಕೇಳಿ",
+        "energyAdvisor": "SHEM - ಶಕ್ತಿ ಸಲಹೆಗಾರ",
         "placeholder": "ನಿಮ್ಮ ಶಕ್ತಿ ಬಳಕೆಯ ಬಗ್ಗೆ ಕೇಳಿ...",
         "thinking": "SHEM ಯೋಚಿಸುತ್ತಿದೆ...",
         "rateLimited": "ದರ ಮಿತಿ. ಒಂದು ಗಂಟೆಯಲ್ಲಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
@@ -58,27 +93,80 @@
         "retry": "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ",
         "settings": "ಚಾಟ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
         "clearHistory": "ಇತಿಹಾಸ ತೆರವುಗೊಳಿಸಿ",
-        "privacyNote": "ನಿಮ್ಮ ಚಾಟ್ ಸುರಕ್ಷಿತವಾಗಿ ಪ್ರಕ್ರಿಯೆಗೊಳ್ಳುತ್ತದೆ.",
+        "privacyNote": "ನಿಮ್ಮ ಚಾಟ್ ಸುರಕ್ಷಿತವಾಗಿ ಪ್ರಕ್ರಿಯೆಗೊಳ್ಳುತ್ತದೆ. ನಾವು ವೈಯಕ್ತಿಕ ಡೇಟಾ ಸಂಗ್ರಹಿಸುವುದಿಲ್ಲ.",
         "tellMeMore": "ಹೆಚ್ಚು ಹೇಳಿ",
         "howToDoThis": "ಇದನ್ನು ಹೇಗೆ ಮಾಡುವುದು?",
-        "whatElse": "ಇನ್ನೇನು?"
+        "whatElse": "ಇನ್ನೇನು?",
+        "consumptionTrend": "ನನ್ನ ಬಳಕೆ ಪ್ರವೃತ್ತಿ ಏನು?",
+        "whichHourCostsMost": "ಯಾವ ಗಂಟೆ ನನಗೆ ಹೆಚ್ಚು ಖರ್ಚಾಗುತ್ತದೆ?",
+        "anyAnomalies": "ಯಾವುದೇ ಅಸಹಜತೆಗಳು ಇವೆಯೇ?",
+        "whyBillHigh": "ನನ್ನ ಬಿಲ್ ಏಕೆ ಹೆಚ್ಚು?",
+        "scheduleAC": "ನನ್ನ AC ಅನ್ನು ಹೇಗೆ ನಿಗದಿಪಡಿಸುವುದು?",
+        "bestTimeWashingMachine": "ವಾಷಿಂಗ್ ಮೆಷಿನ್ ಚಲಾಯಿಸಲು ಉತ್ತಮ ಸಮಯ?",
+        "optimizeDeviceUsage": "ನನ್ನ ಸಾಧನ ಬಳಕೆಯನ್ನು ಆಪ್ಟಿಮೈಜ್ ಮಾಡಿ"
     },
     "forecast": {
         "title": "ಶಕ್ತಿ ಮುನ್ಸೂಚನೆ",
+        "refresh": "ರಿಫ್ರೆಶ್",
+        "collectingData": "ನಿಖರ ಮುನ್ಸೂಚನೆಗಳಿಗಾಗಿ ಡೇಟಾ ಸಂಗ್ರಹಿಸಲಾಗುತ್ತಿದೆ...",
+        "needMoreDays": "{{days}} ಹೆಚ್ಚು ದಿನಗಳ ಡೇಟಾ ಅಗತ್ಯ",
         "tomorrow": "ನಾಳಿನ ಮುನ್ಸೂಚನೆ",
         "weeklyForecast": "ವಾರದ ಮುನ್ಸೂಚನೆ",
         "monthlyProjection": "ಮಾಸಿಕ ಪ್ರಕ್ಷೇಪಣ",
+        "soFar": "ಇಲ್ಲಿಯವರೆಗೆ",
+        "forecasted": "ಮುನ್ಸೂಚಿಸಲಾಗಿದೆ",
+        "daysLeft": "ದಿನಗಳು ಉಳಿದಿವೆ",
+        "projectedTotal": "ಪ್ರಕ್ಷೇಪಿತ ಒಟ್ಟು",
+        "vsLastMonth": "ಕಳೆದ ತಿಂಗಳಿಗೆ ಹೋಲಿಸಿದರೆ",
         "predictedUsage": "ಊಹಿಸಿದ ಬಳಕೆ",
         "estimatedCost": "ಅಂದಾಜು ವೆಚ್ಚ",
-        "confidence": "ನಂಬಿಕೆ"
+        "confidence": "ನಂಬಿಕೆ",
+        "whatIfCalculator": "ಏನಾದರೆ ಕ್ಯಾಲ್ಕುಲೇಟರ್",
+        "whatIfReduceAC": "ನಾನು AC ಬಳಕೆಯನ್ನು {{percent}}% ಕಡಿಮೆ ಮಾಡಿದರೆ?",
+        "calculateSavings": "ಉಳಿತಾಯ ಲೆಕ್ಕಾಚಾರ ಮಾಡಿ"
     },
     "appliances": {
-        "title": "ಉಪಕರಣಗಳು",
+        "title": "ಉಪಕರಣ ವಿಭಜನೆ",
         "breakdown": "ಅಂದಾಜು ಉಪಕರಣ ವಿಭಜನೆ",
+        "learningPatterns": "ನಿಮ್ಮ ಮಾದರಿಗಳನ್ನು ಕಲಿಯುತ್ತಿದೆ",
+        "needMoreData": "ನಿಮ್ಮ ಉಪಕರಣಗಳನ್ನು ನಿಖರವಾಗಿ ಗುರುತಿಸಲು {{days}} ಹೆಚ್ಚು ದಿನಗಳ ಡೇಟಾ ಅಗತ್ಯ.",
+        "dataPointsCollected": "{{current}} / {{total}} ಡೇಟಾ ಪಾಯಿಂಟ್‌ಗಳು ಸಂಗ್ರಹಿಸಲಾಗಿದೆ",
         "detected": "ಪತ್ತೆಯಾದ ಉಪಕರಣಗಳು",
         "unidentified": "ಗುರುತಿಸದ ಬಳಕೆ",
         "addManually": "ಹಸ್ತಚಾಲಿತವಾಗಿ ಉಪಕರಣ ಸೇರಿಸಿ",
         "waysToSave": "ಹಣ ಉಳಿಸುವ ಮಾರ್ಗಗಳು"
+    },
+    "peakHours": {
+        "smartTariffSavings": "ಸ್ಮಾರ್ಟ್ ಟ್ಯಾರಿಫ್ ಉಳಿತಾಯ",
+        "offPeakHours": "ಆಫ್-ಪೀಕ್ ಗಂಟೆಗಳು",
+        "untilPeakHours": "ಪೀಕ್ ಗಂಟೆಗಳವರೆಗೆ",
+        "currentPower": "ಪ್ರಸ್ತುತ ಶಕ್ತಿ",
+        "hourlyCost": "ಗಂಟೆಯ ವೆಚ್ಚ",
+        "shiftToOffPeak": "ಆಫ್-ಪೀಕ್‌ಗೆ ಬದಲಾಯಿಸಿ ಮತ್ತು ಉಳಿಸಿ",
+        "runAtNight": "ರಾತ್ರಿ 11 - ಬೆಳಗ್ಗೆ 6 ಗಂಟೆಗೆ ಚಲಾಯಿಸಿ",
+        "useAfterMidnight": "ಮಧ್ಯರಾತ್ರಿ ನಂತರ ಬಳಸಿ",
+        "scheduleEarly": "ಬೆಳಗ್ಗೆ 1-2 ಗಂಟೆಗೆ ನಿಗದಿಪಡಿಸಿ",
+        "chargeOvernight": "ರಾತ್ರಿಯಿಡೀ ಚಾರ್ಜ್ ಮಾಡಿ",
+        "hourForecast": "24-ಗಂಟೆ ಮುನ್ಸೂಚನೆ",
+        "viewSchedule": "ವೇಳಾಪಟ್ಟಿ ನೋಡಿ",
+        "nextOffPeak": "ಮುಂದಿನ ಆಫ್-ಪೀಕ್"
+    },
+    "costOptimizer": {
+        "title": "ವೆಚ್ಚ ಆಪ್ಟಿಮೈಜರ್",
+        "subtitle": "ನಿಮ್ಮ ಉಳಿತಾಯ ಸಾಮರ್ಥ್ಯವನ್ನು ಗರಿಷ್ಠಗೊಳಿಸಿ",
+        "yourCurrentCosts": "ನಿಮ್ಮ ಪ್ರಸ್ತುತ ವೆಚ್ಚಗಳು",
+        "whatIfScenarios": "ಏನಾದರೆ ಸನ್ನಿವೇಶಗಳು",
+        "actionPlan": "ಕ್ರಿಯಾ ಯೋಜನೆ",
+        "totalConsumption": "ಒಟ್ಟು ಬಳಕೆ",
+        "totalCost": "ಒಟ್ಟು ವೆಚ್ಚ",
+        "costBreakdown": "ವೆಚ್ಚ ವಿಭಜನೆ",
+        "peakVsOffPeak": "ಪೀಕ್ vs ಆಫ್-ಪೀಕ್ ವಿಶ್ಲೇಷಣೆ",
+        "enableSmartScheduling": "ಸ್ಮಾರ್ಟ್ ಶೆಡ್ಯೂಲಿಂಗ್ ಸಕ್ರಿಯಗೊಳಿಸಿ",
+        "printPlan": "ಯೋಜನೆ ಮುದ್ರಿಸಿ"
+    },
+    "aiInsight": {
+        "title": "AI ಒಳನೋಟ",
+        "analyzing": "ನಿಮ್ಮ ಶಕ್ತಿ ಮಾದರಿಗಳನ್ನು ವಿಶ್ಲೇಷಿಸಲಾಗುತ್ತಿದೆ..."
     },
     "common": {
         "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
@@ -90,7 +178,17 @@
         "edit": "ಸಂಪಾದಿಸಿ",
         "refresh": "ರಿಫ್ರೆಶ್",
         "viewAll": "ಎಲ್ಲಾ ನೋಡಿ",
-        "moreLanguages": "ಹೆಚ್ಚಿನ ಭಾಷೆಗಳು..."
+        "moreLanguages": "ಹೆಚ್ಚಿನ ಭಾಷೆಗಳು...",
+        "units": "ಯೂನಿಟ್‌ಗಳು",
+        "days": "ದಿನಗಳು",
+        "hours": "ಗಂಟೆಗಳು",
+        "minutes": "ನಿಮಿಷಗಳು",
+        "now": "ಈಗ",
+        "ac": "AC",
+        "waterHeater": "ವಾಟರ್ ಹೀಟರ್",
+        "washingMachine": "ವಾಷಿಂಗ್ ಮೆಷಿನ್",
+        "evCharging": "EV ಚಾರ್ಜಿಂಗ್",
+        "perDay": "/ದಿನ"
     },
     "units": {
         "watts": "W",
@@ -99,6 +197,7 @@
         "volts": "V",
         "amperes": "A",
         "rupees": "₹",
-        "percentage": "%"
+        "percentage": "%",
+        "hz": "Hz"
     }
 }

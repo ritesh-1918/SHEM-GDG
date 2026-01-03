@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const supabase = require('../supabaseClient');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -6,31 +6,46 @@ exports.registerUser = async (req, res) => {
   const { email, password, name, address, phone, deviceId, householdSize, houseType, energyProvider } = req.body;
 
   try {
-    let user = await User.findOne({ email });
-    if (user) {
+    // Check if user exists
+    const { data: existingUser } = await supabase
+      .from('users')
+      .select('*')
+      .eq('email', email)
+      .single();
+
+    if (existingUser) {
       return res.status(400).json({ msg: 'User already exists' });
     }
 
-    user = new User({
-      email,
-      password,
-      name,
-      address,
-      phone,
-      deviceId,
-      householdSize,
-      houseType,
-      energyProvider,
-    });
-
+    // Encrypt password
     const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    await user.save();
+    // Insert new user
+    const { data: newUser, error: insertError } = await supabase
+      .from('users')
+      .insert([{
+        email,
+        password: hashedPassword,
+        name,
+        address,
+        phone,
+        device_id: deviceId,
+        household_size: householdSize,
+        house_type: houseType,
+        energy_provider: energyProvider
+      }])
+      .select()
+      .single();
 
+    if (insertError) {
+      throw insertError;
+    }
+
+    // Create JWT
     const payload = {
       user: {
-        id: user.id,
+        id: newUser.id,
       },
     };
 
@@ -53,11 +68,18 @@ exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    let user = await User.findOne({ email });
-    if (!user) {
+    // Check if user exists
+    const { data: user, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('email', email)
+      .single();
+
+    if (error || !user) {
       return res.status(400).json({ msg: 'Invalid Credentials' });
     }
 
+    // Match password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ msg: 'Invalid Credentials' });

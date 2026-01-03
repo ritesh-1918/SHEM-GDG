@@ -26,6 +26,9 @@ const LoginPage = () => {
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const [isMagicLink, setIsMagicLink] = useState(false);
+  const [message, setMessage] = useState('');
+
   // Auto-slide effect
   useEffect(() => {
     const timer = setInterval(() => {
@@ -34,7 +37,7 @@ const LoginPage = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const { login, user } = useAuth();
+  const { login, loginWithMagicLink, loginWithGoogle, user } = useAuth();
 
   // Redirect if already logged in
   useEffect(() => {
@@ -46,19 +49,39 @@ const LoginPage = () => {
   const handleLogin = async (e, credentials = null) => {
     if (e && e.preventDefault) e.preventDefault();
     setError('');
+    setMessage('');
 
     // Use credentials if provided, otherwise fallback to state
     const loginUser = credentials?.username || username;
     const loginPass = credentials?.password || password;
 
+    if (!loginUser) {
+      setError('Please enter your email.');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      await login(loginUser, loginPass);
-      navigate('/dashboard');
+      if (isMagicLink) {
+        console.log("Attempting Magic Link for:", loginUser);
+        const result = await loginWithMagicLink(loginUser);
+        console.log("Magic Link Result:", result);
+
+        if (result.error) {
+          console.error("Magic Link Error Object:", result.error);
+          setError(result.error.message || JSON.stringify(result.error) || 'Failed to send magic link');
+        } else {
+          setMessage('Magic Link sent! Check your email to sign in.');
+          // Optional: clear input or just leave it
+        }
+      } else {
+        await login(loginUser, loginPass);
+        navigate('/dashboard');
+      }
     } catch (err) {
-      setError('Invalid username or password');
-      console.error(err);
+      console.error("Login Exception:", err);
+      setError(typeof err === 'string' ? err : err.message || JSON.stringify(err));
     } finally {
       setIsLoading(false);
     }
@@ -91,7 +114,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
+    <div className="min-h-screen flex items-center justify-center bg-white transition-colors duration-500">
       <Link to="/" className="fixed top-4 left-4 md:top-8 md:left-8 z-50 flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors bg-white/80 dark:bg-gray-900/80 backdrop-blur-md px-4 py-2 rounded-full shadow-sm hover:shadow-md group">
         <ArrowRightIcon className="h-4 w-4 transform rotate-180 group-hover:-translate-x-1 transition-transform" />
         <span className="font-medium">Home</span>
@@ -173,44 +196,62 @@ const LoginPage = () => {
               <p className="text-gray-500 dark:text-gray-400">Access your dashboard</p>
             </div>
 
+            <div className="mb-6 flex space-x-4 border-b border-gray-200 dark:border-gray-700">
+              <button
+                type="button"
+                onClick={() => setIsMagicLink(false)}
+                className={`pb-2 text-sm font-medium transition-colors ${!isMagicLink ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'}`}
+              >
+                Password Login
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsMagicLink(true)}
+                className={`pb-2 text-sm font-medium transition-colors ${isMagicLink ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'}`}
+              >
+                Magic Link
+              </button>
+            </div>
+
             <form onSubmit={handleLogin} className="space-y-6">
               <div>
-                <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
+                <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email / Username</label>
                 <input
                   type="text"
                   id="username"
                   className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none text-gray-900 dark:text-white"
-                  placeholder="Enter your username"
+                  placeholder="Enter your email"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required
                 />
               </div>
 
-              <div>
-                <div className="flex justify-between items-center mb-1">
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
-                  {/* <a href="#" className="text-xs text-primary hover:text-primary-dark">Forgot password?</a> */}
+              {!isMagicLink && (
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                  </div>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      id="password"
+                      className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none text-gray-900 dark:text-white pr-10"
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required={!isMagicLink}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+                    >
+                      {showPassword ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
+                    </button>
+                  </div>
                 </div>
-                <div className="relative">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    id="password"
-                    className="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none text-gray-900 dark:text-white pr-10"
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
-                  >
-                    {showPassword ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
-                  </button>
-                </div>
-              </div>
+              )}
 
               {error && (
                 <motion.div
@@ -219,6 +260,16 @@ const LoginPage = () => {
                   className="p-3 rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-100 dark:border-red-800 text-red-600 dark:text-red-400 text-sm text-center"
                 >
                   {error}
+                </motion.div>
+              )}
+
+              {message && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-3 rounded-lg bg-green-50 dark:bg-green-900/30 border border-green-100 dark:border-green-800 text-green-600 dark:text-green-400 text-sm text-center"
+                >
+                  {message}
                 </motion.div>
               )}
 
@@ -231,7 +282,7 @@ const LoginPage = () => {
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                 ) : (
                   <>
-                    Sign In
+                    {isMagicLink ? 'Send Magic Link' : 'Sign In'}
                     <ArrowRightIcon className="h-4 w-4" />
                   </>
                 )}
@@ -245,9 +296,22 @@ const LoginPage = () => {
 
               <button
                 type="button"
+                onClick={async () => {
+                  const { error } = await loginWithGoogle();
+                  if (error) setError('Google Login Failed');
+                }}
+                className="w-full bg-white dark:bg-gray-700 text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 font-bold py-3 px-4 rounded-lg shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600 transition-all flex items-center justify-center gap-2 mb-4"
+              >
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" className="w-5 h-5" alt="Google" />
+                Sign in with Google
+              </button>
+
+              <button
+                type="button"
                 onClick={() => {
                   setUsername('demo@shem.pro');
                   setPassword('demo123');
+                  setIsMagicLink(false);
                   handleLogin({ preventDefault: () => { } }, { username: 'demo@shem.pro', password: 'demo123' });
                 }}
                 className="w-full bg-white dark:bg-gray-700 text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 font-bold py-3 px-4 rounded-lg shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600 transition-all flex items-center justify-center gap-2"

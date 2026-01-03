@@ -55,7 +55,7 @@ export const NavbarLanguageSwitcher = () => {
                 className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-dashboard-textSecondary/10 hover:bg-dashboard-textSecondary/20 transition-colors text-dashboard-text"
             >
                 <span className="text-lg">{currentLang.flag}</span>
-                <span className="text-sm font-medium hidden sm:inline">{currentLang.code.toUpperCase()}</span>
+                <span className="text-sm font-medium hidden sm:inline">{currentLang.nativeName}</span>
                 <ChevronDownIcon className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
             </button>
 
@@ -142,8 +142,8 @@ const LanguageSwitcher = ({ userId = 'anonymous' }) => {
                         onClick={() => changeLanguage(lang.code)}
                         disabled={loading}
                         className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all duration-200 ${i18n.language === lang.code
-                                ? 'bg-accent/20 border-accent text-dashboard-text'
-                                : 'bg-dashboard-textSecondary/5 border-dashboard-textSecondary/20 text-dashboard-text hover:border-accent/50'
+                            ? 'bg-accent/20 border-accent text-dashboard-text'
+                            : 'bg-dashboard-textSecondary/5 border-dashboard-textSecondary/20 text-dashboard-text hover:border-accent/50'
                             } ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                     >
                         <span className="text-2xl">{lang.flag}</span>
