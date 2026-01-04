@@ -4,24 +4,26 @@
 
 **SHEM (Smart Home Energy Manager)** is a comprehensive IoT-based solution designed to monitor, analyze, and optimize household energy consumption in real-time. Combining a powerful **ESP32-based hardware controller** with a sleek **React/Vite Dashboard**, SHEM empowers users to take control of their electricity bills and reduce their carbon footprint.
 
+> **🚀 Live Demo:** [View Live Deployment](https://shem-gdg-srinivas.vercel.app)
+
 ---
 
 ## 🌟 Key Features
 
 ### 🖥️ Dashboard V2 (Premium Experience)
 - **Real-Time Monitoring**: Visualize Voltage, Current, Power, and Energy consumption live.
-- **AI-Powered Insights**: Integrated **Chatbot & Smart Tips** (powered by OpenRouter/Gemini) to suggest actionable energy-saving habits.
+- **AI-Powered Insights**: Integrated **Chatbot & Smart Tips** (powered by Gemini) to suggest actionable energy-saving habits.
+- **Interactive Video Demo**: Watch how SHEM works directly from the landing page.
+- **Responsive Layout**: Optimized for all screen sizes with seamless scroll animations (`RevealOnScroll`).
 - **Device Control**: Remote toggle for appliances (AC, Lights, etc.) directly from the web interface.
-- **Cost Analytics**: Interactive charts breaking down daily/weekly costs and appliance usage.
-- **Responsive Design**: "Premium Dark/Gold" aesthetic optimized for Desktop and Mobile.
 
 ### 🤖 Intelligent Automation
 - **Predictive Budgeting**: Set monthly energy budgets and get alerted before you cross them.
-- **Smart Notifications**: Instant alerts for high usage, connection loss, or system anomalies via a centralized Notification Hub.
+- **Smart Notifications**: Instant alerts for high usage, connection loss, or system anomalies.
 
 ### 🔧 Full Stack Architecture
 - **Frontend**: React, Vite, TailwindCSS, Recharts, Framer Motion.
-- **Backend**: Node.js, Express, MongoDB (Structure ready for scale).
+- **Backend**: Node.js, Express, Supabase (PostgreSQL).
 - **Hardware**: ESP32, PZEM-004T Sensors, Relay Modules.
 
 ---
@@ -30,61 +32,41 @@
 
 ### Prerequisites
 - Node.js (v18+)
-- MongoDB (Local or Atlas)
 - Git
+- Supabase Account
 
 ### Installation
 
 1.  **Clone the Repository**
     ```bash
-    git clone https://github.com/ritesh-1918/SHEM.git
-    cd SHEM
+    git clone https://github.com/srinivas191206/SHEM-GDG.git
+    cd SHEM-GDG
     ```
 
 2.  **Setup Frontend**
     ```bash
     cd shem-pro-frontend
     npm install
+    # Rename env.example to .env and add your keys
+    cp env.example .env
     ```
 
-3.  **Setup Backend**
+3.  **Running the App**
     ```bash
-    cd ../shem-pro-backend
-    npm install
+    npm run dev
     ```
-
-### Configuration (.env)
-
-Create a `.env` file in `shem-pro-frontend` for AI features:
-```env
-VITE_OPENROUTER_KEY=your_key_here
-VITE_GROQ_KEY=your_key_here
-VITE_GEMINI_KEY=your_key_here
-```
-
-### Running the App
-
-**Frontend (Dashboard)**
-```bash
-cd shem-pro-frontend
-npm run dev
-```
-> Access at `http://localhost:5173`
-
-**Backend (API)**
-```bash
-cd shem-pro-backend
-npm run dev
-```
-> Server running on `http://localhost:5000`
+    > Access at `http://localhost:5173`
 
 ---
 
-## 📸 Screenshots
+## 📸 Functionality
 
-| Dashboard Overview | Analytics & Charts | AI Assistant |
-| :---: | :---: | :---: |
-| *Visual of live metrics* | *Deep dive into cost analysis* | *Chatting with SHEM AI* |
+### How It Works
+The system uses sensors to collect real-time data which is processed by the ESP32 and sent to our secure backend. The frontend visualizes this data, providing:
+1.  **Precision Sensing**: High-accuracy voltage/current readings.
+2.  **Intelligent Processing**: Real-time power factor and energy calculation.
+3.  **AI Analysis**: Gemini AI analyzes patterns to suggest savings.
+4.  **Smart Connectivity**: Seamless WiFi/MQTT data streaming.
 
 ---
 
@@ -92,7 +74,7 @@ npm run dev
 Contributions are welcome! Please fork the repo and submit a Pull Request.
 
 ## 📄 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ---
 
