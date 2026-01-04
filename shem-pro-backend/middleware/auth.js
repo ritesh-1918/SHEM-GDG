@@ -11,7 +11,13 @@ module.exports = function (req, res, next) {
 
   // Verify token
   try {
-    const demoCookie = req.cookies.demo;
+    // Check for explicit demo bypass token
+    if (token === 'demo-token-bypass') {
+      req.user = { id: 'demo-user' };
+      return next();
+    }
+
+    const demoCookie = req.cookies?.demo;
     if (demoCookie) {
       const demoExpires = new Date(demoCookie);
       if (demoExpires > new Date()) {

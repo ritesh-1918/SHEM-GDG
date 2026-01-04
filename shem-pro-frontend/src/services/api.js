@@ -60,8 +60,10 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      localStorage.removeItem('token');
-      window.location.href = '/login';
+      console.warn("API 401 Unauthorized. Token might be invalid for backend, but keeping session alive to prevent loop.");
+      // CRITICAL FIX: Do NOT redirect to login here. It causes a loop if backend & frontend auth differ.
+      // localStorage.removeItem('token');
+      // window.location.href = '/login';
     }
     return Promise.reject(error);
   }

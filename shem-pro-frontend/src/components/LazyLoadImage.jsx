@@ -1,49 +1,25 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const LazyLoadImage = ({ src, alt, className, ...props }) => {
-  const imgRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setIsVisible(true);
-              observer.unobserve(imgRef.current);
-            }
-          });
-        },
-        {
-          rootMargin: '300px',
-        }
-      );
-
-      if (imgRef.current) {
-        observer.observe(imgRef.current);
-      }
-
-      return () => {
-        if (imgRef.current) {
-          observer.unobserve(imgRef.current);
-        }
-      };
-    } else {
-      // Fallback for browsers that don't support IntersectionObserver
-      setIsVisible(true);
-    }
-  }, []);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <img
-      ref={imgRef}
-      src={isVisible ? src : undefined}
-      alt={alt}
-      className={className}
-      loading="lazy" // Native lazy loading as a fallback
-      {...props}
-    />
+    <div className={`relative overflow-hidden ${className}`}>
+      {/* Placeholder / Blur Effect */}
+      <div
+        className={`absolute inset-0 bg-gray-200 dark:bg-gray-800 transition-opacity duration-700 ${isLoaded ? 'opacity-0' : 'opacity-100'}`}
+        aria-hidden="true"
+      />
+
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        onLoad={() => setIsLoaded(true)}
+        className={`transition-opacity duration-700 ease-in-out ${isLoaded ? 'opacity-100' : 'opacity-0'} ${className}`}
+        {...props}
+      />
+    </div>
   );
 };
 

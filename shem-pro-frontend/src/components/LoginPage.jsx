@@ -70,7 +70,14 @@ const LoginPage = () => {
 
         if (result.error) {
           console.error("Magic Link Error Object:", result.error);
-          setError(result.error.message || JSON.stringify(result.error) || 'Failed to send magic link');
+          let errMsg = 'Failed to send magic link';
+          if (result.error.message) errMsg = result.error.message;
+          else if (typeof result.error === 'object') {
+            // Fallback for non-standard error objects
+            errMsg = result.error.error_description || result.error.msg || JSON.stringify(result.error);
+            if (errMsg === '{}') errMsg = "Network Error or Empty Response";
+          }
+          setError(errMsg);
         } else {
           setMessage('Magic Link sent! Check your email to sign in.');
           // Optional: clear input or just leave it
@@ -288,23 +295,7 @@ const LoginPage = () => {
                 )}
               </button>
 
-              <div className="relative flex py-2 items-center">
-                <div className="flex-grow border-t border-gray-200 dark:border-gray-700"></div>
-                <span className="flex-shrink-0 mx-4 text-gray-400 text-xs uppercase">Or</span>
-                <div className="flex-grow border-t border-gray-200 dark:border-gray-700"></div>
-              </div>
-
-              <button
-                type="button"
-                onClick={async () => {
-                  const { error } = await loginWithGoogle();
-                  if (error) setError('Google Login Failed');
-                }}
-                className="w-full bg-white dark:bg-gray-700 text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 font-bold py-3 px-4 rounded-lg shadow-sm hover:bg-gray-50 dark:hover:bg-gray-600 transition-all flex items-center justify-center gap-2 mb-4"
-              >
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" className="w-5 h-5" alt="Google" />
-                Sign in with Google
-              </button>
+              {/* Google Login Removed per user request */}
 
               <button
                 type="button"

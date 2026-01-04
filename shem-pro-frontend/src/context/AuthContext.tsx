@@ -30,15 +30,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         let mounted = true;
 
+        // Failsafe: If Auth takes longer than 5 seconds, force load content
+        const safetyTimer = setTimeout(() => {
+            if (mounted) {
+                console.warn("AuthContext: Safety timer triggered. Forcing loading=false.");
+                setLoading(false);
+            }
+        }, 5000);
+
         const checkAuth = async () => {
             try {
+                console.log("AuthContext: Starting Auth Check...");
                 // Check local storage token first (Legacy/Backend Auth)
                 const token = localStorage.getItem('token');
                 if (token) {
+                    console.log("AuthContext: Found legacy token.");
                     if (mounted) setUser({ email: 'user@example.com' });
                 } else {
                     // Check Supabase Session
+                    console.log("AuthContext: Checking Supabase session...");
                     const { data: { session } } = await supabase.auth.getSession();
+                    console.log("AuthContext: Session result:", session);
+
                     if (session?.user && mounted) {
                         const userData: User = {
                             email: session.user.email,
@@ -51,7 +64,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             } catch (error) {
                 console.error("Auth check failed:", error);
             } finally {
-                if (mounted) setLoading(false);
+                clearTimeout(safetyTimer);
+                // CRITICAL FIX: If this is a redirect back from Google (has hash), 
+                // DO NOT set loading to false yet. Let onAuthStateChange handle it.
+                // Otherwise, ProtectedRoute will redirect to Login and clear the hash before Supabase sees it.
+                const isHashRedirect = window.location.hash && (
+                    window.location.hash.includes('access_token') ||
+                    window.location.hash.includes('error_description') ||
+                    window.location.hash.includes('type=recovery')
+                );
+
+                if (mounted && !isHashRedirect) {
+                    console.log("AuthContext: Auth check finished. Setting loading false.");
+                    setLoading(false);
+                } else if (isHashRedirect) {
+                    console.log("AuthContext: Detected OAuth Hash. Waiting for onAuthStateChange...");
+                }
             }
         };
         checkAuth();
@@ -64,6 +92,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                     id: session.user.id,
                     username: session.user.user_metadata?.full_name || session.user.email?.split('@')[0]
                 };
+
+                // CRITICAL SYNC: Make Supabase token available to api.js
+                if (session.access_token) {
+                    console.log("AuthContext: Syncing Supabase token to localStorage");
+                    localStorage.setItem('token', session.access_token);
+                }
+
                 setUser(userData);
 
                 // Sync with Backend (Upsert User)
@@ -84,8 +119,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
                 setLoading(false);
             } else if (!localStorage.getItem('token') && mounted) {
-                setUser(null);
-                setLoading(false);
+                // CRITICAL FIX: Even if session is null, if there is a hash, IGNORE THIS.
+                // Wait for the actual SIGNED_IN event which comes next.
+                const isHashRedirect = window.location.hash && (
+                    window.location.hash.includes('access_token') ||
+                    window.location.hash.includes('error_description') ||
+                    window.location.hash.includes('type=recovery')
+                );
+
+                if (!isHashRedirect) {
+                    setUser(null);
+                    setLoading(false);
+                } else {
+                    console.log("AuthContext (Listener): Hash detected with null session. Waiting...");
+                }
             }
         });
 

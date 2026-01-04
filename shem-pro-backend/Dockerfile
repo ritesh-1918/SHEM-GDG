@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
@@ -11,9 +11,9 @@ RUN npm ci
 # Copy full application
 COPY . .
 
-# Expose the correct port (Hugging Face Spaces expects 7860)
-ENV PORT=7860
-EXPOSE 7860
+# Expose the correct port (Render standard port)
+ENV PORT=10000
+EXPOSE 10000
 
 # Start server
 CMD ["node", "server.js"]
