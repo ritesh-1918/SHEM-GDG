@@ -11,29 +11,32 @@ import RevealOnScroll from './RevealOnScroll';
 
 const LandingPage = () => {
   return (
-    <div className="font-sans antialiased text-gray-900 bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <Header />
-      <Hero /> {/* Hero usually has its own animations, keeping it outside or inside depends on preference. Let's keep it out to execute immediately on load? Or wrap it. Let's wrap it for consistency but maybe Hero needs to show up immediately. The user said "unveiling every section". Let's wrap subsequent sections mostly. Hero usually loads instantly. Let's wrap everything BUT Header/Footer? actually user said "unveiling every section". Let's wrap standard content sections. */}
 
-      <RevealOnScroll width="100%">
-        <HowItWorks />
-      </RevealOnScroll>
+      <main>
+        <Hero />
 
-      <RevealOnScroll width="100%">
-        <Advantages />
-      </RevealOnScroll>
+        <RevealOnScroll width="100%">
+          <Advantages />
+        </RevealOnScroll>
 
-      <RevealOnScroll width="100%">
-        <FeatureGraphs />
-      </RevealOnScroll>
+        <RevealOnScroll width="100%">
+          <HowItWorks />
+        </RevealOnScroll>
 
-      <RevealOnScroll width="100%">
-        <Team />
-      </RevealOnScroll>
+        <RevealOnScroll width="100%">
+          <FeatureGraphs />
+        </RevealOnScroll>
 
-      <RevealOnScroll width="100%">
-        <FAQ />
-      </RevealOnScroll>
+        <RevealOnScroll width="100%">
+          <Team />
+        </RevealOnScroll>
+
+        <RevealOnScroll width="100%">
+          <FAQ />
+        </RevealOnScroll>
+      </main>
 
       <Footer />
     </div>
